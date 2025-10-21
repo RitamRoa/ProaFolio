@@ -86,7 +86,7 @@ export const EXPERIENCE: Experience[] = [
     ],
     certificate: {
       label: "Download certificate",
-      href: "/certificates/Roa-Zans-certificate.pdf",
+      href: "/certificates/zans-business-marketing-certificate.pdf",
     },
   },
   {
@@ -106,5 +106,9 @@ export const EXPERIENCE: Experience[] = [
 export const CONTACT_LINKS: ContactLink[] = [
   { label: "email", href: "mailto:ritamrao48@gmail.com", hint: "initiate connection" },
   { label: "github", href: "https://github.com/RitamRoa", hint: "inspect source" },
-  { label: "linkedin", href: "https://linkedin.com/in/ritamroa", hint: "sync professional node" },
+  {
+    label: "linkedin",
+    href: "https://www.linkedin.com/in/ritam-rao-86503a2b6/",
+    hint: "sync professional node",
+  },
 ];

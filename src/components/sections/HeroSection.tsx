@@ -3,7 +3,6 @@
 import { type PointerEvent as ReactPointerEvent } from "react";
 import { cubicBezier, motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import useDigitalHum from "@/hooks/useDigitalHum";
 
 const entranceEase = cubicBezier(0.16, 1, 0.3, 1);
 
@@ -32,7 +31,7 @@ const socials = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "https://linkedin.com/in/ritamroa",
+    href: "https://www.linkedin.com/in/ritam-rao-86503a2b6/",
     icon: (
       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
         <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm.02 5.75H2v11.25h3V9.25Zm5 0H7v11.25h3v-5.92c0-1.56.53-2.63 1.85-2.63 1.35 0 1.65 1.03 1.65 2.54v6.01h3v-6.44c0-2.94-1.57-4.31-3.67-4.31-1.69 0-2.44.94-2.86 1.6h-.05l-.13-1.11Z" />
@@ -42,7 +41,6 @@ const socials = [
 ];
 
 export function HeroSection() {
-  const { enabled, toggle } = useDigitalHum();
   const pointerX = useMotionValue(0.5);
   const pointerY = useMotionValue(0.5);
 
@@ -127,7 +125,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.95, duration: 0.75, ease: "easeOut" }}
         >
-          coding through weird projects — shaping poetic interfaces for the networks we inhabit.
+          coding through weird projects
         </motion.p>
 
         <motion.div
@@ -164,15 +162,6 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 1.4, duration: 0.6, ease: "easeOut" }}
         >
-          <motion.button
-            type="button"
-            onClick={() => void toggle()}
-            className="rounded-full border border-[#3EF8FF]/40 bg-black/40 px-5 py-2 font-mono text-sm uppercase tracking-[0.25em] text-[#3EF8FF] transition-colors hover:border-[#3EF8FF] hover:text-white"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {enabled ? "digital hum: on" : "digital hum: off"}
-          </motion.button>
           <Link
             href="#projects"
             className="group rounded-full border border-[#0aff9d] bg-[#0aff9d]/10 px-6 py-2 font-mono text-sm uppercase tracking-[0.25em] text-[#0aff9d] transition-all hover:bg-[#0aff9d]/30"

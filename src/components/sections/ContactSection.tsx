@@ -158,7 +158,9 @@ export function ContactSection() {
                 >
                   <span className="text-[#0aff9d]">&gt; {link.label}</span>
                   <span className="text-xs uppercase tracking-[0.35em] text-[#82ffe4]/70">{link.hint}</span>
-                  <span className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">{link.href}</span>
+                  <span className="break-all text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    {link.href}
+                  </span>
                   <motion.span
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-2xl border border-[#3EF8FF]/40"
