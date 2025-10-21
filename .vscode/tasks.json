@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "pnpm dev",
+      "command": "pnpm",
+      "args": ["dev"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "detail": "Start the Next.js development server with Turbopack"
+    },
+    {
+      "type": "shell",
+      "label": "pnpm lint",
+      "command": "pnpm",
+      "args": ["lint"],
+      "problemMatcher": ["$eslint-stylish"],
+      "group": "test",
+      "detail": "Run ESLint across the project"
+    },
+    {
+      "type": "shell",
+      "label": "pnpm build",
+      "command": "pnpm",
+      "args": ["build"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Create a production build"
+    }
+  ]
+}
