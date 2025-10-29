@@ -4,13 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 type Point = {
-  id: number;
+  id: string;
   x: number;
   y: number;
 };
 
 const MAX_POINTS = 10;
 const FRAME_INTERVAL = 1000 / 60; // cap updates to roughly 60fps
+
+// Ensure unique ids per point across renders/frames
+let pointSequence = 0;
 
 export function CursorTrail() {
   const [points, setPoints] = useState<Point[]>([]);
@@ -23,7 +26,7 @@ export function CursorTrail() {
     const handleMove = (event: PointerEvent) => {
       setActive(true);
       pendingPoint.current = {
-        id: event.timeStamp,
+        id: `${++pointSequence}-${Math.floor(event.timeStamp)}`,
         x: event.clientX,
         y: event.clientY,
       };
@@ -80,7 +83,7 @@ export function CursorTrail() {
           const progress = index / points.length;
           return (
             <motion.span
-              key={point.id}
+              key={`${point.id}-${index}`}
               className="absolute h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[rgba(58,255,222,0.4)] blur-[2px]"
               initial={{ opacity: 0.5, scale: 0.5, x: point.x, y: point.y }}
               animate={{
