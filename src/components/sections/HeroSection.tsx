@@ -163,11 +163,11 @@ export function HeroSection() {
     transition={{ delay: 1.4, duration: 0.6, ease: "easeOut" }}
         >
           <Link
-            href="#projects"
+            href="#contact"
             className="group rounded-full border border-[#0aff9d] bg-[#0aff9d]/10 px-6 py-2 font-mono text-sm uppercase tracking-[0.25em] text-[#0aff9d] transition-all hover:bg-[#0aff9d]/30"
           >
             <span className="group-hover:translate-x-1 inline-flex items-center gap-2 transition-transform">
-              discover more
+              hire me
               <motion.span
                 aria-hidden
                 className="inline-block h-2 w-2 rotate-45 border border-[#0aff9d]"
