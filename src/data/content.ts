@@ -108,7 +108,7 @@ export const CONTACT_LINKS: ContactLink[] = [
   { label: "github", href: "https://github.com/RitamRoa", hint: "inspect source" },
   {
     label: "linkedin",
-    href: "https://www.linkedin.com/in/ritam-rao-86503a2b6/",
+    href: "https://www.linkedin.com/in/ritam-roa/",
     hint: "sync professional node",
   },
 ];
