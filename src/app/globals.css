@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: light;
-  --background: #FFF4EA;
-  --foreground: #333333;
-  --accent: #BF4646;
-  --secondary: #7EACB5;
-  --muted: #EDDCC6;
+  color-scheme: dark;
+  --background: #37353E;
+  --foreground: #D3DAD9;
+  --accent: #715A5A;
+  --secondary: #44444E;
+  --muted: #44444E;
   
   /* Tailwind 4 variables */
   --color-background: var(--background);
@@ -15,6 +15,7 @@
   --color-secondary: var(--secondary);
   --color-muted: var(--muted);
 }
+
 
 
 
@@ -64,10 +65,5 @@ a {
   border-radius: 9999px;
 }
 
-/* Minimalist utilities */
-.glass {
-  background: rgba(92, 84, 112, 0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(185, 180, 199, 0.1);
-}
+
 
