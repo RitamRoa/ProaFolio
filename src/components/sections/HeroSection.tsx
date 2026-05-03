@@ -416,6 +416,8 @@ export function HeroSection() {
                           blockSize={12}
                           blockMargin={4}
                           fontSize={10}
+                          hideTotalCount
+                          hideColorLegend
                           theme={{
                             dark: ['#1d1d21', '#0e4429', '#006d32', '#26a641', '#39d353'],
                           }}
