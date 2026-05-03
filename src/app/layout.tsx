@@ -10,6 +10,11 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Ritam Roa",
   description: "Matrix-inspired portfolio with immersive motion and glitch aesthetics.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-96x96.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
