@@ -449,19 +449,34 @@ export function HeroSection() {
                           <div className="text-[9px] font-bold text-[#715A5A] uppercase tracking-wider bg-[#715A5A]/10 px-2 py-0.5 rounded-full">
                             {exp.period}
                           </div>
-                          {exp.cert && (
-                            <Link
-                              href={exp.cert}
-                              download
-                              target="_blank"
-                              className="opacity-40 group-hover:opacity-100 transition-opacity bg-[#715A5A]/20 hover:bg-[#715A5A]/40 p-1.5 rounded-md"
-                              title="Download Certificate"
-                            >
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-10 5 5 5-5m-5-4v14" />
-                              </svg>
-                            </Link>
-                          )}
+                          <div className="flex gap-2">
+                            {exp.cert && (
+                              <>
+                                <Link
+                                  href={exp.cert}
+                                  target="_blank"
+                                  className="opacity-40 group-hover:opacity-100 transition-opacity bg-[#715A5A]/10 hover:bg-[#715A5A]/30 p-1.5 rounded-md"
+                                  title="View Certificate"
+                                >
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                  </svg>
+                                </Link>
+                                <Link
+                                  href={exp.cert}
+                                  download
+                                  target="_blank"
+                                  className="opacity-40 group-hover:opacity-100 transition-opacity bg-[#715A5A]/10 hover:bg-[#715A5A]/30 p-1.5 rounded-md"
+                                  title="Download Certificate"
+                                >
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-10 5 5 5-5m-5-4v14" />
+                                  </svg>
+                                </Link>
+                              </>
+                            )}
+                          </div>
                         </div>
                         <div>
                           <h4 className="text-sm font-bold text-[#D3DAD9]">{exp.role}</h4>
