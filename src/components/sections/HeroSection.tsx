@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { GitHubCalendar } from "react-github-calendar";
 
 const images = [
   "/new_pics/pic1.jpeg",
@@ -18,6 +19,36 @@ const quotes = [
   { text: "Goodbye, V, And Never Stop Fighting.", author: "Silverhand" },
   { text: "Damn, You're Ugly.", author: "Geralt of Rivia" },
   { text: "I Am Vengeance. I Am The Night. I Am Batman!", author: "Random Orphan" },
+];
+
+const experience = [
+  {
+    role: "President",
+    org: "DevSphere - Open Source Community @ RVU",
+    period: "Jul 2025 - Present",
+    desc: "Leading and Developing the Open Source Community at RVU.",
+    cert: "/certificates/dev-cert-1.pdf"
+  },
+  {
+    role: "Team Lead",
+    org: "Binary Banner - Monthly Newsletter For SOCSE - RVU",
+    period: "Dec 2025 - Jan 2026",
+    desc: "Managing editorial workflows of ll student and faculty achievements for SOCSE-RVU",
+    cert: "/certificates/bb-cert.pdf"
+  },
+  {
+    role: "PR & Outreach",
+    org: "GDG - RVU",
+    period: "Aug 2025 - Dec 2025",
+    desc: "Connecting the developer student club with the campus and out."
+  },
+  {
+    role: "Business Development",
+    org: "ZANS",
+    period: "Jun 2025 - Jul 2025",
+    desc: "Strategic outreach and market positioning for emerging tech solutions.",
+    cert: "/certificates/zans-business-marketing-certificate.pdf"
+  }
 ];
 
 const socials = [
@@ -55,8 +86,10 @@ const socials = [
 ];
 
 export function HeroSection() {
+  const [view, setView] = useState<'home' | 'about'>('home');
   const [imageIndex, setImageIndex] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
+  const [githubData, setGithubData] = useState<{ repos: number; contributions: string } | null>(null);
 
   const featuredRef = useRef<HTMLDivElement>(null);
   const allPostsRef = useRef<HTMLDivElement>(null);
@@ -68,22 +101,73 @@ export function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
-    if (ref.current) {
-      const scrollAmount = direction === 'left' ? -200 : 200;
-      ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    fetch("https://api.github.com/users/RitamRoa")
+      .then(res => res.json())
+      .then(data => {
+        setGithubData({
+          repos: data.public_repos || 0,
+          contributions: "500+"
+        });
+      })
+      .catch(() => {
+        setGithubData({ repos: 12, contributions: "500+" });
+      });
+  }, []);
 
-  return (
+const DraggableProfile = ({ 
+  size = "h-36 w-36", 
+  imageIndex, 
+  setImageIndex 
+}: { 
+  size?: string; 
+  imageIndex: number; 
+  setImageIndex: (val: number | ((prev: number) => number)) => void 
+}) => (
+  <div className="relative shrink-0 cursor-grab active:cursor-grabbing">
+    <div className={`relative ${size} overflow-hidden border-2 border-[#44444E] bg-[#44444E]/50 shadow-2xl`}>
+      <motion.div
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        onDragEnd={(_, info) => {
+          if (info.offset.x > 50) setImageIndex((prev) => (prev - 1 + images.length) % images.length);
+          else if (info.offset.x < -50) setImageIndex((prev) => (prev + 1) % images.length);
+        }}
+        className="h-full w-full"
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={imageIndex}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0"
+          >
+            <Image 
+              src={images[imageIndex]} 
+              alt="Profile" 
+              fill 
+              sizes="(max-width: 768px) 192px, 192px"
+              className="object-cover pointer-events-none" 
+              priority 
+            />
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  </div>
+);
+
+export function HeroSection() {
     <div className="h-screen w-full bg-[#37353E] text-[#D3DAD9] transition-colors duration-500 font-mono flex flex-col selection:bg-[#715A5A] selection:text-white overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 flex flex-col h-full w-full">
         {/* Header */}
         <header className="flex items-center justify-between py-6 shrink-0">
-          <h1 className="text-lg font-bold text-[#D3DAD9] opacity-90 tracking-tighter">Ritam Roa</h1>
+          <button onClick={() => setView('home')} className="text-lg font-bold text-[#D3DAD9] opacity-90 tracking-tighter hover:opacity-100 transition-opacity">Ritam Roa</button>
           <nav className="flex items-center gap-6 text-xs">
-            <Link href="#" className="hover:text-[#715A5A] transition-colors">Posts</Link>
-            <Link href="#" className="hover:text-[#715A5A] transition-colors">About</Link>
+            <button onClick={() => setView('home')} className={`hover:text-[#715A5A] transition-colors ${view === 'home' ? 'text-[#715A5A]' : ''}`}>Posts</button>
+            <button onClick={() => setView('about')} className={`hover:text-[#715A5A] transition-colors ${view === 'about' ? 'text-[#715A5A]' : ''}`}>About</button>
             <div className="flex items-center gap-4 ml-2">
               <button className="hover:text-[#715A5A] opacity-60 hover:opacity-100 transition-all">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -96,124 +180,221 @@ export function HeroSection() {
 
         <div className="h-px w-full bg-[#44444E] shrink-0" />
 
-        <main className="flex-1 flex flex-col py-4 min-h-0">
-          {/* Profile Section */}
-          <section className="flex flex-col md:flex-row items-center gap-8 py-4 shrink-0">
-            <div className="relative shrink-0 cursor-grab active:cursor-grabbing">
-              <div className="relative h-36 w-36 overflow-hidden border-2 border-[#44444E] bg-[#44444E]/50 shadow-2xl">
-                <motion.div
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  onDragEnd={(_, info) => {
-                    if (info.offset.x > 50) setImageIndex((prev) => (prev - 1 + images.length) % images.length);
-                    else if (info.offset.x < -50) setImageIndex((prev) => (prev + 1) % images.length);
-                  }}
-                  className="h-full w-full"
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={imageIndex}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute inset-0"
-                    >
-                      <Image src={images[imageIndex]} alt="Profile" fill className="object-cover pointer-events-none" priority />
-                    </motion.div>
-                  </AnimatePresence>
-                </motion.div>
-              </div>
-            </div>
+        <main className="flex-1 overflow-y-auto no-scrollbar py-4 min-h-0">
+          <AnimatePresence mode="wait">
+            {view === 'home' ? (
+              <motion.div
+                key="home"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col h-full"
+              >
+                {/* Profile Section */}
+                <section className="flex flex-col md:flex-row items-center gap-8 py-4 shrink-0">
+                  <DraggableProfile imageIndex={imageIndex} setImageIndex={setImageIndex} />
 
-            <div className="flex flex-col gap-3 text-center md:text-left flex-1">
-              <h2 className="text-2xl font-bold text-[#D3DAD9]">Hi, I'm Ritam.</h2>
-              <p className="max-w-md opacity-70 leading-relaxed text-sm italic">
-                Understanding why everything the way it is, and also i like making stuff that everyone will actually use.
-              </p>
-              <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-1">
-                <div className="flex gap-3">
-                  {socials.map((s) => (
-                    <Link key={s.id} href={s.href} target="_blank" className="text-[#D3DAD9]/60 hover:text-[#715A5A] transition-all">
-                      {s.icon}
-                    </Link>
-                  ))}
-                </div>
-                <Link
-                  href="https://cal.com/ritam-roa"
-                  target="_blank"
-                  className="bg-[#715A5A] text-[#D3DAD9] px-4 py-1.5 text-[10px] font-bold shadow-lg hover:brightness-110 transition-all border border-[#D3DAD9]/10"
-                >
-                  Book a call
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          <div className="my-4 h-px w-full bg-[#44444E]/50 shrink-0" />
-
-          {/* Featured Posts - Prominent */}
-          <section className="py-2 shrink-0">
-            <div className="flex items-center justify-between mb-4 px-1">
-              <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Featured Posts</h3>
-              <Link href="#" className="flex items-center gap-1 text-[10px] hover:text-[#715A5A] opacity-60 transition-all">
-                View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
-              </Link>
-            </div>
-            <div
-              ref={featuredRef}
-              className="flex gap-6 overflow-x-auto no-scrollbar pb-3 cursor-grab active:cursor-grabbing px-1"
-            >
-              {[1, 2, 3, 4].map((i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ y: -4 }}
-                  className="min-w-[300px] p-6 bg-[#44444E] border border-[#D3DAD9]/5 shadow-xl transition-all hover:border-[#715A5A]/30"
-                >
-                  <h4 className="text-lg font-bold mb-3 text-[#D3DAD9] opacity-90 tracking-tight">Lorem Ipsum Legend {i}</h4>
-                  <p className="text-[12px] opacity-60 line-clamp-2 leading-relaxed">
-                    You just discovered what it takes to become a legend. Wake the f**k up, samurai!
-                  </p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-[10px] opacity-30 italic">5 Mar, 2026</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#715A5A] opacity-60"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
+                  <div className="flex flex-col gap-3 text-center md:text-left flex-1">
+                    <h2 className="text-2xl font-bold text-[#D3DAD9]">Hi, I'm Ritam.</h2>
+                    <p className="max-w-md opacity-70 leading-relaxed text-sm italic">
+                      Understanding why everything the way it is, and also i like making stuff that everyone will actually use.
+                    </p>
+                    <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-1">
+                      <div className="flex gap-3">
+                        {socials.map((s) => (
+                          <Link key={s.id} href={s.href} target="_blank" className="text-[#D3DAD9]/60 hover:text-[#715A5A] transition-all">
+                            {s.icon}
+                          </Link>
+                        ))}
+                      </div>
+                      <Link
+                        href="https://cal.com/ritam-roa"
+                        target="_blank"
+                        className="bg-[#715A5A] text-[#D3DAD9] px-4 py-1.5 text-[10px] font-bold shadow-lg hover:brightness-110 transition-all border border-[#D3DAD9]/10"
+                      >
+                        Book a call
+                      </Link>
+                    </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="flex justify-center gap-4 mt-2">
-              <button onClick={() => scroll(featuredRef, 'left')} className="p-1 hover:text-[#715A5A] transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6" /></svg></button>
-              <button onClick={() => scroll(featuredRef, 'right')} className="p-1 hover:text-[#715A5A] transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m9 18 6-6-6-6" /></svg></button>
-            </div>
-          </section>
+                </section>
 
-          {/* All Posts - Below Featured */}
-          <section className="py-2 shrink-0 mt-2">
-            <div className="flex items-center justify-between mb-3 px-1">
-              <h3 className="text-[10px] font-bold tracking-widest uppercase opacity-30 text-[#D3DAD9]">All Posts</h3>
-              <Link href="#" className="flex items-center gap-1 text-[9px] hover:text-[#715A5A] opacity-50 transition-all">
-                Explore <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
-              </Link>
-            </div>
-            <div
-              ref={allPostsRef}
-              className="flex gap-4 overflow-x-auto no-scrollbar pb-2 cursor-grab active:cursor-grabbing px-1"
-            >
-              {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                <motion.div
-                  key={i}
-                  className="min-w-[160px] p-3 border border-[#44444E] bg-[#44444E]/40 hover:bg-[#44444E]/80 transition-colors"
-                >
-                  <h4 className="text-[11px] font-medium truncate opacity-80 text-[#D3DAD9]">Post #{i}: Cyberpunk Logs</h4>
-                  <div className="text-[8px] opacity-30 mt-1 uppercase tracking-wider">Feb 2026</div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="flex justify-center gap-2 mt-1">
-              <button onClick={() => scroll(allPostsRef, 'left')} className="p-0.5 opacity-40 hover:opacity-100 transition-opacity"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg></button>
-              <button onClick={() => scroll(allPostsRef, 'right')} className="p-0.5 opacity-40 hover:opacity-100 transition-opacity"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 18 6-6-6-6" /></svg></button>
-            </div>
-          </section>
+                <div className="my-4 h-px w-full bg-[#44444E]/50 shrink-0" />
+
+                {/* Featured Posts */}
+                <section className="py-2 shrink-0">
+                  <div className="flex items-center justify-between mb-4 px-1">
+                    <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Featured Posts</h3>
+                    <Link href="#" className="flex items-center gap-1 text-[10px] hover:text-[#715A5A] opacity-60 transition-all">
+                      View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
+                    </Link>
+                  </div>
+                  <div
+                    ref={featuredRef}
+                    className="flex gap-6 overflow-x-auto no-scrollbar pb-3 cursor-grab active:cursor-grabbing px-1"
+                  >
+                    {[1, 2, 3, 4].map((i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -4 }}
+                        className="min-w-[300px] p-6 bg-[#44444E] border border-[#D3DAD9]/5 shadow-xl transition-all hover:border-[#715A5A]/30"
+                      >
+                        <h4 className="text-lg font-bold mb-3 text-[#D3DAD9] opacity-90 tracking-tight">Lorem Ipsum Legend {i}</h4>
+                        <p className="text-[12px] opacity-60 line-clamp-2 leading-relaxed">
+                          You just discovered what it takes to become a legend. Wake the f**k up, samurai!
+                        </p>
+                        <div className="mt-4 flex items-center justify-between">
+                          <span className="text-[10px] opacity-30 italic">5 Mar, 2026</span>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#715A5A] opacity-60"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="flex justify-center gap-4 mt-2">
+                    <button onClick={() => scroll(featuredRef, 'left')} className="p-1 hover:text-[#715A5A] transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6" /></svg></button>
+                    <button onClick={() => scroll(featuredRef, 'right')} className="p-1 hover:text-[#715A5A] transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m9 18 6-6-6-6" /></svg></button>
+                  </div>
+                </section>
+
+                {/* All Posts */}
+                <section className="py-2 shrink-0 mt-2">
+                  <div className="flex items-center justify-between mb-3 px-1">
+                    <h3 className="text-[10px] font-bold tracking-widest uppercase opacity-30 text-[#D3DAD9]">All Posts</h3>
+                    <Link href="#" className="flex items-center gap-1 text-[9px] hover:text-[#715A5A] opacity-50 transition-all">
+                      Explore <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
+                    </Link>
+                  </div>
+                  <div
+                    ref={allPostsRef}
+                    className="flex gap-4 overflow-x-auto no-scrollbar pb-2 cursor-grab active:cursor-grabbing px-1"
+                  >
+                    {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="min-w-[160px] p-3 border border-[#44444E] bg-[#44444E]/40 hover:bg-[#44444E]/80 transition-colors"
+                      >
+                        <h4 className="text-[11px] font-medium truncate opacity-80 text-[#D3DAD9]">Post #{i}: Cyberpunk Logs</h4>
+                        <div className="text-[8px] opacity-30 mt-1 uppercase tracking-wider">Feb 2026</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="flex justify-center gap-2 mt-1">
+                    <button onClick={() => scroll(allPostsRef, 'left')} className="p-0.5 opacity-40 hover:opacity-100 transition-opacity"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg></button>
+                    <button onClick={() => scroll(allPostsRef, 'right')} className="p-0.5 opacity-40 hover:opacity-100 transition-opacity"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 18 6-6-6-6" /></svg></button>
+                  </div>
+                </section>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="about"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col gap-10 pb-12"
+              >
+                {/* About Profile Section - Bigger */}
+                <section className="flex flex-col md:flex-row items-start gap-10 py-6">
+                  <DraggableProfile size="h-48 w-48" imageIndex={imageIndex} setImageIndex={setImageIndex} />
+                  <div className="flex flex-col gap-4 flex-1">
+                    <h2 className="text-3xl font-bold text-[#D3DAD9]">About Me</h2>
+                    <p className="opacity-80 leading-relaxed text-base italic max-w-xl">
+                      "Understanding why everything the way it is, and also i like making stuff that everyone will actually use."
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-4 mt-2">
+                      <div className="flex gap-4">
+                        {socials.map((s) => (
+                          <Link key={s.id} href={s.href} target="_blank" className="text-[#D3DAD9]/60 hover:text-[#715A5A] transition-all">
+                            {s.icon}
+                          </Link>
+                        ))}
+                      </div>
+                      <Link
+                        href="https://cal.com/ritam-roa"
+                        target="_blank"
+                        className="bg-[#715A5A] text-[#D3DAD9] px-4 py-1.5 text-[10px] font-bold shadow-lg hover:brightness-110 transition-all border border-[#D3DAD9]/10"
+                      >
+                        Book a call
+                      </Link>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Github Activity Overview - Big */}
+                <section className="flex flex-col gap-4">
+                  <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Github Activity</h3>
+                  <div className="w-full p-8 bg-black border border-[#D3DAD9]/5 shadow-xl flex flex-col items-center justify-center gap-6 rounded-lg">
+                    <div className="w-full overflow-hidden flex justify-center text-[10px]">
+                      <GitHubCalendar
+                        username="RitamRoa"
+                        blockSize={12}
+                        blockMargin={4}
+                        fontSize={10}
+                        theme={{
+                          dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                        }}
+                      />
+                    </div>
+                    <div className="flex gap-8 text-center">
+                      <div>
+                        <div className="text-2xl font-bold text-[#39d353]">{githubData?.contributions || "..."}</div>
+                        <div className="text-[10px] uppercase opacity-40 text-[#D3DAD9]">Contributions</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-[#39d353]">{githubData?.repos || "..."}</div>
+                        <div className="text-[10px] uppercase opacity-40 text-[#D3DAD9]">Repositories</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-[#39d353]">4</div>
+                        <div className="text-[10px] uppercase opacity-40 text-[#D3DAD9]">Open Source Projects</div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Experience Boxes */}
+                <section className="flex flex-col gap-4">
+                  <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Experience</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {experience.map((exp, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -3 }}
+                        className="p-5 bg-[#44444E] border border-[#D3DAD9]/5 shadow-lg flex flex-col gap-3 relative group"
+                      >
+                        <div className="flex justify-between items-start">
+                          <div className="text-[9px] font-bold text-[#715A5A] uppercase tracking-wider bg-[#715A5A]/10 px-2 py-0.5 rounded-full">
+                            {exp.period}
+                          </div>
+                          {exp.cert && (
+                            <Link
+                              href={exp.cert}
+                              download
+                              target="_blank"
+                              className="opacity-40 group-hover:opacity-100 transition-opacity bg-[#715A5A]/20 hover:bg-[#715A5A]/40 p-1.5 rounded-md"
+                              title="Download Certificate"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-10 5 5 5-5m-5-4v14" />
+                              </svg>
+                            </Link>
+                          )}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-[#D3DAD9]">{exp.role}</h4>
+                          <div className="text-[10px] opacity-50 mt-1">{exp.org}</div>
+                        </div>
+                        <p className="text-[11px] opacity-60 leading-relaxed mt-1">
+                          {exp.desc}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </section>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </main>
 
         <div className="h-px w-full bg-[#44444E] shrink-0" />
@@ -262,12 +443,5 @@ export function HeroSection() {
     </div>
   );
 }
-
-export default HeroSection;
-
-
-
-
-
 
 
