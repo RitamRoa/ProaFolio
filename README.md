@@ -1,47 +1,67 @@
-# Matrix Portfolio
+# Ritam Roa — Professional Portfolio
 
-Matrix-inspired personal portfolio built with Next.js, JetBrains Mono, and Framer Motion. The site layers a GPU-friendly code rain, glitch transitions, and cursor-trail effects to create an always-dark digital mainframe aesthetic.
+A high-fidelity, high-performance portfolio dashboard built with **Next.js 15**, **Tailwind CSS**, and **Framer Motion**. Designed with a sophisticated, minimalist aesthetic using a curated four-color palette, featuring immersive motion effects and a unified data layer.
 
-## Highlights
+## 🚀 Key Features
 
-- Fullscreen canvas-based Matrix rain with parallax glare and scroll-linked dimming
-- Boot sequence overlay, glitch typography, and cursor particle trail powered by Framer Motion
-- Modular sections (`Hero`, `Projects`, `Experience`, `Contact`) staged with cinematic reveal animations
-- Ambient “digital hum” toggle driven by the Web Audio API
-- Neon contact form with animated scan lines and command-style quick links
-- Built with pnpm, App Router, Tailwind v4 utilities, and typed content data
+-   **Dynamic Dashboard Layout**: A single-viewport experience with fluid tab-based navigation (Home, Featured, Gallery, About).
+-   **Interactive Home Slider**: Auto-cycling featured posts with cache-busting image support and smooth transitions.
+-   **Masonry Photography Gallery**: A high-density grid for personal photography featuring grayscale-to-color hover effects.
+-   **Draggable Profile UI**: A unique, interactive profile picture component with touch/drag support for cycling through media.
+-   **Centralized Data Architecture**: All content is managed via a dedicated `portfolio.tsx` data layer for easy maintenance.
+-   **GitHub Integration**: Real-time fetching of repository counts and contribution metrics via the GitHub API.
+-   **Distraction-Free Modals**: Custom-built image viewers for detailed project viewing and full-scale photography appreciation.
 
-## Getting Started
+## 🛠️ Tech Stack
 
-```bash
-pnpm install
-pnpm dev
-```
+-   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+-   **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+-   **Icons**: Custom SVG implementations
+-   **Deployment**: [Vercel](https://vercel.com/)
+-   **Package Manager**: npm
 
-Visits run at http://localhost:3000. Update copy and visuals in `src/data/content.ts` and the section components under `src/components/sections/`.
+## 🎨 Design System
 
-## Available Scripts
+The project adheres to a strict, premium color palette:
+-   `#37353E` — Primary Background
+-   `#44444E` — Secondary Surface / Borders
+-   `#715A5A` — Accent / Action Color
+-   `#D3DAD9` — High-Contrast Typography
 
-- `pnpm dev` – start the Next.js development server
-- `pnpm build` – create a production build
-- `pnpm start` – serve the production build
-- `pnpm lint` – run ESLint with the Next.js config
+## 📥 Getting Started
 
-## Key Files & Folders
+### Prerequisites
+-   Node.js 18.x or higher
+-   npm
 
-- `src/app/page.tsx` – assembles the background, boot overlay, and all sections
-- `src/components/background/MatrixBackground.tsx` – canvas Matrix rain with parallax & scroll dimming
-- `src/components/effects/*` – boot loader, cursor trail, and ambient audio hook
-- `src/components/sections/*` – hero, projects, experience, and contact blocks
-- `src/data/content.ts` – single source of truth for project, experience, and contact copy
+### Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/RitamRoa/ProaFolio.git
+    ```
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+3. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-## Animation & Performance Notes
+Open [http://localhost:3000](http://localhost:3000) to view the result.
 
-- Canvas animation throttled with `requestAnimationFrame` and DPR scaling for crisp glyphs
-- Parallax layers and glitch effects rely on Framer Motion springs for smooth GPU-accelerated transforms
-- Cursor trail is capped to 16 particles to balance responsiveness and motion clarity
-- Ambient sound uses Web Audio oscillators/noise; browsers require a user gesture before playback
+## 🏗️ Structure
 
-## Deployment
+-   `src/app/` — Next.js App Router and Global Styles
+-   `src/components/` — Reusable UI components and page sections
+-   `src/data/portfolio.tsx` — **The Source of Truth.** Edit this file to update posts, images, and bio content.
+-   `public/` — Static assets (images, certificates, and photography)
 
-Create an optimized build with `pnpm build` and deploy the `.next` output to your preferred static host (Vercel recommended for Next.js).
+## 🌐 Deployment
+
+This project is optimized for **Vercel**. 
+Simply push your changes to the `main` branch, and Vercel will handle the production build and deployment automatically.
+
+---
+Built with ☕ and code by [Ritam Roa](https://github.com/RitamRoa)
