@@ -403,11 +403,8 @@ export function HeroSection() {
                     <div className="bg-[#44444E] border border-[#D3DAD9]/10 px-4 py-2 rounded-full flex items-center gap-2">
                       <span className="text-[10px] font-bold tracking-tight uppercase">Github activity</span>
                     </div>
-                    <span className="text-[10px] opacity-60 font-medium">
-                      775+ contributions in the last year
-                    </span>
                   </div>
-                  
+
                   <div className="w-full p-6 sm:p-8 bg-[#44444E]/30 border border-[#D3DAD9]/5 shadow-xl flex flex-col gap-6 rounded-2xl">
                     <div className="w-full overflow-x-auto no-scrollbar flex justify-center py-2">
                       <div className="min-w-[600px] scale-90 sm:scale-100 flex justify-center">
@@ -416,21 +413,21 @@ export function HeroSection() {
                           blockSize={12}
                           blockMargin={4}
                           fontSize={10}
-                          hideTotalCount
-                          hideColorLegend
+                          showTotalCount={false}
+                          showColorLegend={false}
                           theme={{
                             dark: ['#1d1d21', '#0e4429', '#006d32', '#26a641', '#39d353'],
                           }}
                         />
                       </div>
                     </div>
-                    
+
                     <div className="h-px w-full bg-[#D3DAD9]/10" />
-                    
+
                     <div className="text-xs sm:text-sm opacity-80 font-medium tracking-tight">
-                      Last pushed on {githubData?.lastPushed ? new Date(githubData.lastPushed).toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        month: 'long', 
+                      Last pushed on {githubData?.lastPushed ? new Date(githubData.lastPushed).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        month: 'long',
                         day: 'numeric',
                         year: 'numeric'
                       }) : "Monday, May 4th 2026"}
