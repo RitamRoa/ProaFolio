@@ -8,7 +8,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ritam Roa — Matrix Portfolio",
+  title: "Ritam Roa",
   description: "Matrix-inspired portfolio with immersive motion and glitch aesthetics.",
 };
 

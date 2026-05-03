@@ -6,261 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { GitHubCalendar } from "react-github-calendar";
 
-const images = [
-  "/new_pics/pic1.jpeg",
-  "/new_pics/pic2.jpeg",
-  "/new_pics/pic3.jpeg",
-  "/new_pics/pic4.jpeg",
-];
-
-const quotes = [
-  { text: "You Just Discovered What It Takes To Become A Legend.", author: "Silverhand" },
-  { text: "Wake The F**k Up, Samurai! We Have A City To Burn.", author: "Silverhand" },
-  { text: "Goodbye, V, And Never Stop Fighting.", author: "Silverhand" },
-  { text: "Damn, You're Ugly.", author: "Geralt of Rivia" },
-  { text: "I Am Vengeance. I Am The Night. I Am Batman!", author: "Random Orphan" },
-];
-
-const experience = [
-  {
-    role: "President",
-    org: "DevSphere - Open Source Community @ RVU",
-    period: "Jul 2025 - Present",
-    desc: "Leading and Developing the Open Source Community at RVU.",
-    cert: "/certificates/dev-cert-1.pdf"
-  },
-  {
-    role: "Team Lead",
-    org: "Binary Banner - Monthly Newsletter For SOCSE - RVU",
-    period: "Dec 2025 - Jan 2026",
-    desc: "Managing editorial workflows of ll student and faculty achievements for SOCSE-RVU",
-    cert: "/certificates/bb-cert.pdf"
-  },
-  {
-    role: "PR & Outreach",
-    org: "GDG - RVU",
-    period: "Aug 2025 - Dec 2025",
-    desc: "Connecting the developer student club with the campus and out."
-  },
-  {
-    role: "Business Development",
-    org: "ZANS",
-    period: "Jun 2025 - Jul 2025",
-    desc: "Strategic outreach and market positioning for emerging tech solutions.",
-    cert: "/certificates/zans-business-marketing-certificate.pdf"
-  }
-];
-
-type Post = {
-  id: string;
-  title: string;
-  date: string;
-  caption: string;
-  venue: string;
-  folder: string;
-  images: string[];
-};
-
-const posts: Post[] = [
-  {
-    id: "build-hackathon",
-    title: "AI Build Sprint Hackathon",
-    date: "2026-04-10",
-    caption: "Won AI Build Sprint Hackathon",
-    venue: "RV University",
-    folder: "build",
-    images: ["/features_posts/build/ai%20bulld%20spint%20at%20rvu%20april%2010.jpeg", "/features_posts/build/pic%202.jpeg"]
-  },
-  {
-    id: "build-with-ai",
-    title: "Build with AI - Google for Developers",
-    date: "2026-04-06",
-    caption: "Lead Speaker at Build with AI - Google for Developers",
-    venue: "RV University",
-    folder: "build with ai",
-    images: ["/features_posts/build%20with%20ai/pic%201.png"]
-  },
-  {
-    id: "nav-world-ai",
-    title: "Navigating the World of AI",
-    date: "2026-03-20",
-    caption: "Organized Navigating the World of AI with Databricks",
-    venue: "ECE Hall",
-    folder: "nav world of ai",
-    images: ["/features_posts/nav%20world%20of%20ai/pic%201%20.jpeg"]
-  },
-  {
-    id: "linkin-park",
-    title: "Linkin Park Concert",
-    date: "2026-01-23",
-    caption: "LINKIN PARK AND BLOODYWOOD CONCERT",
-    venue: "Bangalore",
-    folder: "linkin park",
-    images: ["/features_posts/linkin%20park/pic%201%20.jpeg", "/features_posts/linkin%20park/pic%202%20.jpeg"]
-  },
-  {
-    id: "civo",
-    title: "Civo Navigate India",
-    date: "2025-11-18",
-    caption: "Civo Navigate India Event",
-    venue: "Four Seasons",
-    folder: "civo",
-    images: ["/features_posts/civo/pic%201%20.jpeg", "/features_posts/civo/pic%202%20.jpeg"]
-  },
-  {
-    id: "notion",
-    title: "Notion India Team",
-    date: "2025-11-06",
-    caption: "Met Notion India Team",
-    venue: "MG Road",
-    folder: "notion",
-    images: ["/features_posts/notion/pic%201%20.jpeg"]
-  },
-  {
-    id: "vibeathon",
-    title: "SAP Github Vibeathon",
-    date: "2025-09-27",
-    caption: "Runner Up at SAP Github Vibeathon",
-    venue: "SAP Labs India Whitefield",
-    folder: "vibeathon",
-    images: ["/features_posts/vibeathon/pic%201%20.jpeg", "/features_posts/vibeathon/pic%202%20.jpeg"]
-  },
-  {
-    id: "fkcci",
-    title: "Met Revathi Kamath @ FKCCI",
-    date: "2025-09-19",
-    caption: "Met Revathi Kamath @ FKCCI",
-    venue: "FKCCI",
-    folder: "fkcci revathi kamath",
-    images: ["/features_posts/fkcci%20revathi%20kamath/pic%201%20.jpeg"]
-  },
-  {
-    id: "teachers-day",
-    title: "Teachers Day",
-    date: "2025-09-05",
-    caption: "Teachers day with merin mam",
-    venue: "Her Cabin",
-    folder: "teachers day",
-    images: ["/features_posts/teachers%20day/pic%201%20.jpeg"]
-  },
-  {
-    id: "co-pilot",
-    title: "Organized Co Pilot event",
-    date: "2025-08-22",
-    caption: "Organized Co Pilot event with Dhanashri Chavan, Github",
-    venue: "RVU",
-    folder: "co pilot",
-    images: ["/features_posts/co%20pilot/pic%201%20.jpeg", "/features_posts/co%20pilot/pic%202%20.jpeg"]
-  },
-  {
-    id: "santhe",
-    title: "RVU Santhe",
-    date: "2025-06-31",
-    caption: "First event as President of Devsphere",
-    venue: "RVU",
-    folder: "santhe",
-    images: ["/features_posts/santhe/june%2031%20santhe.jpeg", "/features_posts/santhe/pic%202%20.jpeg"]
-  },
-  {
-    id: "grant",
-    title: "ICSSR Grant Work",
-    date: "2025-06-22",
-    caption: "at Mysuru for ICSSR Grant Related work",
-    venue: "Mysuru",
-    folder: "grant",
-    images: ["/features_posts/grant/june%2022%20.jpeg"]
-  },
-  {
-    id: "bb-inauguration",
-    title: "Binary Banner Inauguration",
-    date: "2025-02-21",
-    caption: "Binary Banner Inauguration",
-    venue: "RVU",
-    folder: "bb",
-    images: ["/features_posts/bb/bb%20inaug.jpeg", "/features_posts/bb/pic%202%20.jpeg"]
-  },
-  {
-    id: "deb-comp",
-    title: "Debating Competition",
-    date: "2025-02-06",
-    caption: "First place at debating competition",
-    venue: "RVU Tarang",
-    folder: "deb comp",
-    images: ["/features_posts/deb%20comp/pic%202.jpeg"]
-  },
-  {
-    id: "math-nirvana",
-    title: "Math Nirvana",
-    date: "2024-12-11",
-    caption: "Organizing Committee - Math Nirvana",
-    venue: "RVU",
-    folder: "math nirvana",
-    images: ["/features_posts/math%20nirvana/Math%20nirvana.jpeg"]
-  },
-  {
-    id: "marathon",
-    title: "CAIAS Marathon",
-    date: "2024-12-01",
-    caption: "gottigere till Electronic City ~ 15 kms within 52 mins",
-    venue: "Gottigere to Electronic City",
-    folder: "caias marathon",
-    images: ["/features_posts/caias%20marathon/pic%201%20.jpeg", "/features_posts/caias%20marathon/pic%202%20.jpeg"]
-  },
-  {
-    id: "ideathon",
-    title: "Ideathon 2.0",
-    date: "2024-11-13",
-    caption: "Ideathon 2.0 @ IEM Seminar Hall, RV",
-    venue: "IEM Seminar Hall, RV",
-    folder: "Ideathon",
-    images: ["/features_posts/Ideathon/Nov%2013%20ideathon.jpeg"]
-  }
-];
-
-const socials = [
-  {
-    id: "github",
-    href: "https://github.com/RitamRoa",
-    icon: (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-        <path d="M9 18c-4.51 2-5-2-7-2" />
-      </svg>
-    )
-  },
-  {
-    id: "linkedin",
-    href: "https://linkedin.com/in/ritam-roa",
-    icon: (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect width="4" height="12" x="2" y="9" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    )
-  },
-  {
-    id: "gmail",
-    href: "mailto:ritamrao48@gmail.com",
-    icon: (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="20" height="16" x="2" y="4" rx="2" />
-        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-      </svg>
-    )
-  },
-  {
-    id: "instagram",
-    href: "https://www.instagram.com/ritam.roa/",
-    icon: (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-      </svg>
-    )
-  }
-];
+import { 
+  images, 
+  quotes, 
+  experience, 
+  galleryImages, 
+  socials,
+  posts, 
+  type Post 
+} from "@/data/portfolio";
 
 const DraggableProfile = ({
   size = "h-36 w-36",
@@ -322,10 +76,11 @@ const DraggableProfile = ({
 );
 
 export function HeroSection() {
-  const [view, setView] = useState<'home' | 'about' | 'gallery'>('home');
+  const [view, setView] = useState<'home' | 'about' | 'posts' | 'gallery'>('home');
   const [imageIndex, setImageIndex] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [githubData, setGithubData] = useState<{ repos: number; contributions: string } | null>(null);
 
@@ -383,15 +138,9 @@ export function HeroSection() {
           <button onClick={() => setView('home')} className="text-lg font-bold text-[#D3DAD9] opacity-90 tracking-tighter hover:opacity-100 transition-opacity">Ritam Roa</button>
           <nav className="flex items-center gap-6 text-xs">
             <button onClick={() => setView('home')} className={`hover:text-[#715A5A] transition-colors ${view === 'home' ? 'text-[#715A5A]' : ''}`}>Home</button>
-            <button onClick={() => setView('gallery')} className={`hover:text-[#715A5A] transition-colors ${view === 'gallery' ? 'text-[#715A5A]' : ''}`}>Posts</button>
+            <button onClick={() => setView('posts')} className={`hover:text-[#715A5A] transition-colors ${view === 'posts' ? 'text-[#715A5A]' : ''}`}>Featured</button>
+            <button onClick={() => setView('gallery')} className={`hover:text-[#715A5A] transition-colors ${view === 'gallery' ? 'text-[#715A5A]' : ''}`}>Gallery</button>
             <button onClick={() => setView('about')} className={`hover:text-[#715A5A] transition-colors ${view === 'about' ? 'text-[#715A5A]' : ''}`}>About</button>
-            <div className="flex items-center gap-4 ml-2">
-              <button onClick={() => setView('gallery')} className={`hover:text-[#715A5A] transition-all ${view === 'gallery' ? 'opacity-100' : 'opacity-60'}`}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect width="16" height="16" x="4" y="4" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m20 16-3-3a2 2 0 0 0-2.8 0L6 20" />
-                </svg>
-              </button>
-            </div>
           </nav>
         </header>
 
@@ -413,7 +162,7 @@ export function HeroSection() {
                   <DraggableProfile imageIndex={imageIndex} setImageIndex={setImageIndex} />
 
                   <div className="flex flex-col gap-3 text-center md:text-left flex-1">
-                    <h2 className="text-2xl font-bold text-[#D3DAD9]">Hi, I'm Ritam.</h2>
+                    <h2 className="text-2xl font-bold text-[#D3DAD9]">Hi, I&apos;m Ritam.</h2>
                     <p className="max-w-md opacity-70 leading-relaxed text-sm italic">
                       In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
                     </p>
@@ -441,8 +190,8 @@ export function HeroSection() {
                 {/* Recent Posts Slider */}
                 <section className="py-2 shrink-0">
                   <div className="flex items-center justify-between mb-6 px-1">
-                    <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Feautured Posts</h3>
-                    <button onClick={() => setView('gallery')} className="flex items-center gap-1 text-[10px] hover:text-[#715A5A] opacity-60 transition-all">
+                    <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Featured Posts</h3>
+                    <button onClick={() => setView('posts')} className="flex items-center gap-1 text-[10px] hover:text-[#715A5A] opacity-60 transition-all">
                       View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
                     </button>
                   </div>
@@ -458,15 +207,22 @@ export function HeroSection() {
                         className="min-w-[320px] bg-[#44444E] border border-[#D3DAD9]/5 shadow-2xl transition-all group overflow-hidden cursor-pointer"
                       >
                         <div className="relative h-48 w-full overflow-hidden">
-                          <Image
-                            src={post.images[0]}
-                            alt={post.title}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                            sizes="320px"
-                            priority={idx < 2}
-                            loading={idx < 2 ? "eager" : "lazy"}
-                          />
+                          {post.images && post.images.length > 0 ? (
+                            <Image
+                              src={post.images[0]}
+                              alt={post.title}
+                              fill
+                              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                              sizes="320px"
+                              priority={idx < 2}
+                              loading={idx < 2 ? "eager" : "lazy"}
+                              unoptimized={post.images[0].includes('?')}
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-[#37353E] flex items-center justify-center text-[10px] opacity-20 uppercase tracking-widest">
+                              Coming Soon
+                            </div>
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-[#37353E]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         <div className="p-5 flex flex-col gap-2">
@@ -493,9 +249,9 @@ export function HeroSection() {
               </motion.div>
             )}
 
-            {view === 'gallery' && (
+            {view === 'posts' && (
               <motion.div
-                key="gallery"
+                key="posts"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -503,7 +259,7 @@ export function HeroSection() {
                 className="pb-12"
               >
                 <div className="mb-8 flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-[#D3DAD9]">Gallery</h2>
+                  <h2 className="text-2xl font-bold text-[#D3DAD9]">Featured Posts</h2>
                   <button onClick={() => setView('home')} className="text-xs opacity-40 hover:opacity-100 transition-opacity">Back Home</button>
                 </div>
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
@@ -518,15 +274,22 @@ export function HeroSection() {
                       className="break-inside-avoid bg-[#44444E] border border-[#D3DAD9]/5 shadow-xl transition-all cursor-pointer group"
                     >
                       <div className="relative overflow-hidden">
-                        <Image
-                          src={post.images[0]}
-                          alt={post.title}
-                          width={400}
-                          height={300}
-                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          priority={idx < 4}
-                        />
+                        {post.images && post.images.length > 0 ? (
+                          <Image
+                            src={post.images[0]}
+                            alt={post.title}
+                            width={400}
+                            height={300}
+                            className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            priority={idx < 4}
+                            unoptimized={post.images[0].includes('?')}
+                          />
+                        ) : (
+                          <div className="w-full h-48 bg-[#44444E] flex items-center justify-center text-[10px] opacity-20 uppercase tracking-widest">
+                            No Image Available
+                          </div>
+                        )}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <span className="text-[10px] uppercase tracking-widest font-bold">View Detail</span>
                         </div>
@@ -538,6 +301,45 @@ export function HeroSection() {
                         </div>
                         <div className="text-[9px] opacity-40 line-clamp-1">{post.venue}</div>
                       </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {view === 'gallery' && (
+              <motion.div
+                key="gallery"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="pb-12"
+              >
+                <div className="mb-8 flex flex-col gap-1">
+                  <h2 className="text-2xl font-bold text-[#D3DAD9]">Gallery</h2>
+                  <p className="text-[10px] opacity-40 italic">random pictures that i took (99%)</p>
+                </div>
+                <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                  {galleryImages.map((img, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.02 }}
+                      onClick={() => setSelectedGalleryImage(img)}
+                      className="break-inside-avoid relative group cursor-pointer overflow-hidden border border-white/5"
+                    >
+                      <Image
+                        src={img}
+                        alt={`Gallery ${idx}`}
+                        width={300}
+                        height={400}
+                        className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                        loading="lazy"
+                      />
                     </motion.div>
                   ))}
                 </div>
@@ -559,7 +361,7 @@ export function HeroSection() {
                   <div className="flex flex-col gap-4 flex-1">
                     <h2 className="text-3xl font-bold text-[#D3DAD9]">About Me</h2>
                     <p className="opacity-80 leading-relaxed text-base italic max-w-xl">
-                      "In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
+                      &quot;In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
                     </p>
                     <div className="flex flex-wrap items-center gap-4 mt-2">
                       <div className="flex gap-4">
@@ -666,10 +468,10 @@ export function HeroSection() {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col gap-0.5"
               >
-                <p className="text-[10px] font-medium italic opacity-60 leading-relaxed max-w-xl">
-                  "{quotes[quoteIndex].text}"
+                <p className="text-[11px] font-medium italic opacity-80 text-[#D3DAD9] leading-relaxed max-w-xl">
+                  &quot;{quotes[quoteIndex].text}&quot;
                 </p>
-                <p className="text-[8px] uppercase tracking-[0.3em] font-bold opacity-40 text-[#715A5A]">
+                <p className="text-[9px] uppercase tracking-[0.4em] font-bold opacity-60 text-[#715A5A]">
                   — {quotes[quoteIndex].author}
                 </p>
               </motion.div>
@@ -713,13 +515,20 @@ export function HeroSection() {
                     transition={{ duration: 0.3 }}
                     className="absolute inset-0"
                   >
-                    <Image
-                      src={selectedPost.images[modalImageIndex]}
-                      alt={`${selectedPost.title} - ${modalImageIndex}`}
-                      fill
-                      className="object-contain"
-                      sizes="50vw"
-                    />
+                    {selectedPost.images[modalImageIndex] ? (
+                      <Image
+                        src={selectedPost.images[modalImageIndex]}
+                        alt={`${selectedPost.title} - ${modalImageIndex}`}
+                        fill
+                        className="object-contain"
+                        sizes="50vw"
+                        unoptimized={selectedPost.images[modalImageIndex].includes('?')}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-xs opacity-20">
+                        Image Not Found
+                      </div>
+                    )}
                   </motion.div>
                 </AnimatePresence>
 
@@ -765,11 +574,48 @@ export function HeroSection() {
                 </div>
                 <div className="h-px w-full bg-[#D3DAD9]/10" />
                 <p className="text-sm leading-relaxed opacity-70 italic">
-                  "{selectedPost.caption}"
+                  &quot;{selectedPost.caption}&quot;
                 </p>
                 <div className="mt-auto pt-8 flex items-center gap-2">
-                  <div className="text-[10px] opacity-30 uppercase tracking-[0.2em]">Shared via Ritam's Timeline</div>
+                  <div className="text-[10px] opacity-30 uppercase tracking-[0.2em]">Shared via Ritam&apos;s Timeline</div>
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Gallery Image Modal */}
+      <AnimatePresence>
+        {selectedGalleryImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedGalleryImage(null)}
+            className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center"
+            >
+              <button 
+                onClick={() => setSelectedGalleryImage(null)}
+                className="absolute -top-12 right-0 p-2 text-white/50 hover:text-white transition-colors"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
+              <div className="relative w-full h-full">
+                <Image
+                  src={selectedGalleryImage}
+                  alt="Gallery Full"
+                  fill
+                  className="object-contain"
+                  sizes="90vw"
+                />
               </div>
             </motion.div>
           </motion.div>
