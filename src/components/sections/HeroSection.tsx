@@ -186,7 +186,7 @@ const posts: Post[] = [
     caption: "First place at debating competition",
     venue: "RVU Tarang",
     folder: "deb comp",
-    images: ["/features_posts/deb%20comp/feb%206%20.jpeg", "/features_posts/deb%20comp/pic%202.jpeg"]
+    images: ["/features_posts/deb%20comp/pic%202.jpeg"]
   },
   {
     id: "math-nirvana",
@@ -248,6 +248,17 @@ const socials = [
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
       </svg>
     )
+  },
+  {
+    id: "instagram",
+    href: "https://www.instagram.com/ritam.roa/",
+    icon: (
+      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+      </svg>
+    )
   }
 ];
 
@@ -269,7 +280,7 @@ const DraggableProfile = ({
           if (info.offset.x > 50) setImageIndex((prev) => (prev - 1 + images.length) % images.length);
           else if (info.offset.x < -50) setImageIndex((prev) => (prev + 1) % images.length);
         }}
-        className="h-full w-full"
+        className="h-full w-full relative"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -292,19 +303,19 @@ const DraggableProfile = ({
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      
+
       {/* Profile Arrows */}
-      <button 
+      <button
         onClick={(e) => { e.stopPropagation(); setImageIndex((prev) => (prev - 1 + images.length) % images.length); }}
         className="absolute left-2 top-1/2 -translate-y-1/2 p-1 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-0 group-hover/profile:opacity-100 backdrop-blur-sm z-10"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg>
       </button>
-      <button 
+      <button
         onClick={(e) => { e.stopPropagation(); setImageIndex((prev) => (prev + 1) % images.length); }}
         className="absolute right-2 top-1/2 -translate-y-1/2 p-1 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-0 group-hover/profile:opacity-100 backdrop-blur-sm z-10"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 6 6 6-6 6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 6 6 6-6 6" /></svg>
       </button>
     </div>
   </div>
@@ -321,8 +332,15 @@ export function HeroSection() {
   useEffect(() => {
     if (!selectedPost) setModalImageIndex(0);
   }, [selectedPost]);
-  
+
   const featuredRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -364,6 +382,7 @@ export function HeroSection() {
         <header className="flex items-center justify-between py-6 shrink-0">
           <button onClick={() => setView('home')} className="text-lg font-bold text-[#D3DAD9] opacity-90 tracking-tighter hover:opacity-100 transition-opacity">Ritam Roa</button>
           <nav className="flex items-center gap-6 text-xs">
+            <button onClick={() => setView('home')} className={`hover:text-[#715A5A] transition-colors ${view === 'home' ? 'text-[#715A5A]' : ''}`}>Home</button>
             <button onClick={() => setView('gallery')} className={`hover:text-[#715A5A] transition-colors ${view === 'gallery' ? 'text-[#715A5A]' : ''}`}>Posts</button>
             <button onClick={() => setView('about')} className={`hover:text-[#715A5A] transition-colors ${view === 'about' ? 'text-[#715A5A]' : ''}`}>About</button>
             <div className="flex items-center gap-4 ml-2">
@@ -396,7 +415,7 @@ export function HeroSection() {
                   <div className="flex flex-col gap-3 text-center md:text-left flex-1">
                     <h2 className="text-2xl font-bold text-[#D3DAD9]">Hi, I'm Ritam.</h2>
                     <p className="max-w-md opacity-70 leading-relaxed text-sm italic">
-                      Understanding why everything the way it is, and also i like making stuff that everyone will actually use.
+                      In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
                     </p>
                     <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-1">
                       <div className="flex gap-3">
@@ -422,7 +441,7 @@ export function HeroSection() {
                 {/* Recent Posts Slider */}
                 <section className="py-2 shrink-0">
                   <div className="flex items-center justify-between mb-6 px-1">
-                    <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Recent Posts</h3>
+                    <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Feautured Posts</h3>
                     <button onClick={() => setView('gallery')} className="flex items-center gap-1 text-[10px] hover:text-[#715A5A] opacity-60 transition-all">
                       View all <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
                     </button>
@@ -439,27 +458,27 @@ export function HeroSection() {
                         className="min-w-[320px] bg-[#44444E] border border-[#D3DAD9]/5 shadow-2xl transition-all group overflow-hidden cursor-pointer"
                       >
                         <div className="relative h-48 w-full overflow-hidden">
-                          <Image 
-                            src={post.images[0]} 
-                            alt={post.title} 
-                            fill 
-                            className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                            sizes="320px" 
+                          <Image
+                            src={post.images[0]}
+                            alt={post.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="320px"
                             priority={idx < 2}
                             loading={idx < 2 ? "eager" : "lazy"}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#37353E]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         <div className="p-5 flex flex-col gap-2">
-                          <div className="flex justify-between items-start">
-                            <h4 className="text-sm font-bold text-[#D3DAD9] opacity-90 tracking-tight line-clamp-1">{post.title}</h4>
-                            <span className="text-[9px] opacity-30 italic whitespace-nowrap">{formatDate(post.date)}</span>
+                          <div className="flex justify-between items-start gap-3">
+                            <h4 className="text-sm font-bold text-[#D3DAD9] opacity-90 tracking-tight line-clamp-1 flex-1">{post.title}</h4>
+                            <span className="text-[9px] opacity-30 italic whitespace-nowrap mt-0.5">{formatDate(post.date)}</span>
                           </div>
                           <p className="text-[11px] opacity-60 line-clamp-2 leading-relaxed h-8">
                             {post.caption}
                           </p>
                           <div className="mt-2 flex items-center gap-1.5 opacity-30 text-[9px] uppercase tracking-wider">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
                             {post.venue}
                           </div>
                         </div>
@@ -513,9 +532,9 @@ export function HeroSection() {
                         </div>
                       </div>
                       <div className="p-4">
-                        <div className="flex justify-between items-center mb-1">
-                          <h4 className="text-xs font-bold text-[#D3DAD9]">{post.title}</h4>
-                          <span className="text-[8px] opacity-30">{formatDate(post.date)}</span>
+                        <div className="flex justify-between items-start gap-2 mb-1">
+                          <h4 className="text-xs font-bold text-[#D3DAD9] line-clamp-1 flex-1">{post.title}</h4>
+                          <span className="text-[8px] opacity-30 whitespace-nowrap mt-0.5">{formatDate(post.date)}</span>
                         </div>
                         <div className="text-[9px] opacity-40 line-clamp-1">{post.venue}</div>
                       </div>
@@ -540,7 +559,7 @@ export function HeroSection() {
                   <div className="flex flex-col gap-4 flex-1">
                     <h2 className="text-3xl font-bold text-[#D3DAD9]">About Me</h2>
                     <p className="opacity-80 leading-relaxed text-base italic max-w-xl">
-                      "Understanding why everything the way it is, and also i like making stuff that everyone will actually use."
+                      "In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
                     </p>
                     <div className="flex flex-wrap items-center gap-4 mt-2">
                       <div className="flex gap-4">
@@ -694,36 +713,36 @@ export function HeroSection() {
                     transition={{ duration: 0.3 }}
                     className="absolute inset-0"
                   >
-                    <Image 
-                      src={selectedPost.images[modalImageIndex]} 
-                      alt={`${selectedPost.title} - ${modalImageIndex}`} 
-                      fill 
-                      className="object-contain" 
-                      sizes="50vw" 
+                    <Image
+                      src={selectedPost.images[modalImageIndex]}
+                      alt={`${selectedPost.title} - ${modalImageIndex}`}
+                      fill
+                      className="object-contain"
+                      sizes="50vw"
                     />
                   </motion.div>
                 </AnimatePresence>
 
                 {selectedPost.images.length > 1 && (
                   <>
-                    <button 
+                    <button
                       onClick={() => setModalImageIndex((prev) => (prev - 1 + selectedPost.images.length) % selectedPost.images.length)}
                       className="absolute left-4 p-2 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-0 group-hover/modal:opacity-100 backdrop-blur-sm z-10"
                     >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6"/></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg>
                     </button>
-                    <button 
+                    <button
                       onClick={() => setModalImageIndex((prev) => (prev + 1) % selectedPost.images.length)}
                       className="absolute right-4 p-2 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-0 group-hover/modal:opacity-100 backdrop-blur-sm z-10"
                     >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 6 6 6-6 6"/></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 6 6 6-6 6" /></svg>
                     </button>
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full z-10">
                       {selectedPost.images.map((_, i) => (
-                        <button 
+                        <button
                           key={i}
                           onClick={() => setModalImageIndex(i)}
-                          className={`w-1.5 h-1.5 rounded-full transition-all ${i === modalImageIndex ? 'bg-[#715A5A] w-4' : 'bg-white/30'}`} 
+                          className={`w-1.5 h-1.5 rounded-full transition-all ${i === modalImageIndex ? 'bg-[#715A5A] w-4' : 'bg-white/30'}`}
                         />
                       ))}
                     </div>
@@ -737,11 +756,11 @@ export function HeroSection() {
                     <div className="text-xs text-[#715A5A] font-bold mt-1">{formatDate(selectedPost.date)}</div>
                   </div>
                   <button onClick={() => setSelectedPost(null)} className="p-2 hover:bg-white/5 rounded-full transition-colors opacity-40 hover:opacity-100">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12" /></svg>
                   </button>
                 </div>
                 <div className="flex items-center gap-2 opacity-50 text-[10px] uppercase tracking-widest font-bold">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
                   {selectedPost.venue}
                 </div>
                 <div className="h-px w-full bg-[#D3DAD9]/10" />
@@ -749,7 +768,7 @@ export function HeroSection() {
                   "{selectedPost.caption}"
                 </p>
                 <div className="mt-auto pt-8 flex items-center gap-2">
-                   <div className="text-[10px] opacity-30 uppercase tracking-[0.2em]">Shared via Ritam's Timeline</div>
+                  <div className="text-[10px] opacity-30 uppercase tracking-[0.2em]">Shared via Ritam's Timeline</div>
                 </div>
               </div>
             </motion.div>
