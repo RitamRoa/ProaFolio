@@ -82,7 +82,7 @@ export function HeroSection() {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null);
   const [modalImageIndex, setModalImageIndex] = useState(0);
-  const [githubData, setGithubData] = useState<{ repos: number; contributions: string } | null>(null);
+  const [githubData, setGithubData] = useState<{ repos: number; contributions: string; lastPushed: string } | null>(null);
 
   useEffect(() => {
     if (!selectedPost) setModalImageIndex(0);
@@ -110,10 +110,9 @@ export function HeroSection() {
       .then(res => res.json())
       .then(data => {
         setGithubData(prev => ({
-          ...prev,
-          repos: data.public_repos,
+          repos: data.public_repos || 64,
           contributions: "775+",
-          lastPushed: prev?.lastPushed || data.updated_at
+          lastPushed: prev?.lastPushed || data.updated_at || new Date().toISOString()
         }));
       });
 
@@ -121,16 +120,23 @@ export function HeroSection() {
     fetch("https://api.github.com/users/RitamRoa/events/public")
       .then(res => res.json())
       .then(events => {
-        const lastPush = events.find((e: any) => e.type === "PushEvent");
-        if (lastPush) {
-          setGithubData(prev => ({
-            ...prev,
-            lastPushed: lastPush.created_at
-          }));
+        if (Array.isArray(events)) {
+          const lastPush = events.find((e: any) => e.type === "PushEvent");
+          if (lastPush) {
+            setGithubData(prev => ({
+              repos: prev?.repos || 64,
+              contributions: prev?.contributions || "775+",
+              lastPushed: lastPush.created_at
+            }));
+          }
         }
       })
       .catch(() => {
-        setGithubData(prev => ({ ...prev, lastPushed: new Date().toISOString() }));
+        setGithubData(prev => ({
+          repos: prev?.repos || 64,
+          contributions: prev?.contributions || "775+",
+          lastPushed: prev?.lastPushed || new Date().toISOString()
+        }));
       });
   }, []);
 
