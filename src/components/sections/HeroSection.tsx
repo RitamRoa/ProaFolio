@@ -17,7 +17,7 @@ import {
 } from "@/data/portfolio";
 
 const DraggableProfile = ({
-  size = "h-36 w-36",
+  size = "h-32 w-32 sm:h-36 sm:w-36",
   imageIndex,
   setImageIndex
 }: {
@@ -131,12 +131,12 @@ export function HeroSection() {
   };
 
   return (
-    <div className="h-screen w-full bg-[#37353E] text-[#D3DAD9] transition-colors duration-500 font-mono flex flex-col selection:bg-[#715A5A] selection:text-white overflow-hidden">
+    <div className="min-h-screen h-[100dvh] w-full bg-[#37353E] text-[#D3DAD9] transition-colors duration-500 font-mono flex flex-col selection:bg-[#715A5A] selection:text-white overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 flex flex-col h-full w-full">
         {/* Header */}
-        <header className="flex items-center justify-between py-6 shrink-0">
-          <button onClick={() => setView('home')} className="text-lg font-bold text-[#D3DAD9] opacity-90 tracking-tighter hover:opacity-100 transition-opacity">Ritam Roa</button>
-          <nav className="flex items-center gap-6 text-xs">
+        <header className="flex flex-col sm:flex-row items-center justify-between py-6 gap-4 shrink-0">
+          <button onClick={() => setView('home')} className="text-xl font-bold text-[#D3DAD9] opacity-90 tracking-tighter hover:opacity-100 transition-opacity">Ritam Roa</button>
+          <nav className="flex items-center gap-4 sm:gap-6 text-[10px] sm:text-xs">
             <button onClick={() => setView('home')} className={`hover:text-[#715A5A] transition-colors ${view === 'home' ? 'text-[#715A5A]' : ''}`}>Home</button>
             <button onClick={() => setView('posts')} className={`hover:text-[#715A5A] transition-colors ${view === 'posts' ? 'text-[#715A5A]' : ''}`}>Featured</button>
             <button onClick={() => setView('gallery')} className={`hover:text-[#715A5A] transition-colors ${view === 'gallery' ? 'text-[#715A5A]' : ''}`}>Gallery</button>
@@ -204,7 +204,7 @@ export function HeroSection() {
                         key={post.id}
                         whileHover={{ y: -8 }}
                         onClick={() => setSelectedPost(post)}
-                        className="min-w-[320px] bg-[#44444E] border border-[#D3DAD9]/5 shadow-2xl transition-all group overflow-hidden cursor-pointer"
+                        className="min-w-[280px] sm:min-w-[320px] bg-[#44444E] border border-[#D3DAD9]/5 shadow-2xl transition-all group overflow-hidden cursor-pointer"
                       >
                         <div className="relative h-48 w-full overflow-hidden">
                           {post.images && post.images.length > 0 ? (
@@ -356,8 +356,8 @@ export function HeroSection() {
                 className="flex flex-col gap-10 pb-12"
               >
                 {/* About Profile Section - Bigger */}
-                <section className="flex flex-col md:flex-row items-start gap-10 py-6">
-                  <DraggableProfile size="h-48 w-48" imageIndex={imageIndex} setImageIndex={setImageIndex} />
+                <section className="flex flex-col md:flex-row items-center md:items-start gap-10 py-6">
+                  <DraggableProfile size="h-40 w-40 sm:h-48 sm:w-48" imageIndex={imageIndex} setImageIndex={setImageIndex} />
                   <div className="flex flex-col gap-4 flex-1">
                     <h2 className="text-3xl font-bold text-[#D3DAD9]">About Me</h2>
                     <p className="opacity-80 leading-relaxed text-base italic max-w-xl">
@@ -397,13 +397,13 @@ export function HeroSection() {
                         }}
                       />
                     </div>
-                    <div className="flex gap-12 text-center">
+                    <div className="flex flex-wrap gap-8 sm:gap-12 text-center justify-center">
                       <div>
-                        <div className="text-3xl font-bold text-[#39d353]">{githubData?.contributions || "775+"}</div>
+                        <div className="text-2xl sm:text-3xl font-bold text-[#39d353]">{githubData?.contributions || "775+"}</div>
                         <div className="text-[10px] uppercase opacity-40 text-[#D3DAD9] mt-1">Contributions</div>
                       </div>
                       <div>
-                        <div className="text-3xl font-bold text-[#39d353]">64</div>
+                        <div className="text-2xl sm:text-3xl font-bold text-[#39d353]">{githubData?.repos || 64}</div>
                         <div className="text-[10px] uppercase opacity-40 text-[#D3DAD9] mt-1">Repositories</div>
                       </div>
                     </div>
@@ -478,9 +478,9 @@ export function HeroSection() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-4 flex flex-col md:flex-row items-center justify-between text-[8px] opacity-20 tracking-[0.2em] uppercase">
+          <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-[8px] opacity-20 tracking-[0.2em] uppercase">
             <p>© 2026 Ritam Roa</p>
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <Link href="#" className="hover:opacity-100 transition-colors">Privacy</Link>
               <Link href="#" className="hover:opacity-100 transition-colors">Terms</Link>
             </div>
@@ -505,7 +505,7 @@ export function HeroSection() {
               onClick={(e) => e.stopPropagation()}
               className="bg-[#44444E] w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-[#D3DAD9]/10 shadow-2xl flex flex-col md:flex-row"
             >
-              <div className="md:w-1/2 bg-black flex items-center justify-center relative min-h-[400px] group/modal">
+              <div className="md:w-1/2 bg-black flex items-center justify-center relative aspect-square sm:aspect-auto sm:min-h-[400px] group/modal shrink-0">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={modalImageIndex}
@@ -521,7 +521,7 @@ export function HeroSection() {
                         alt={`${selectedPost.title} - ${modalImageIndex}`}
                         fill
                         className="object-contain"
-                        sizes="50vw"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         unoptimized={selectedPost.images[modalImageIndex].includes('?')}
                       />
                     ) : (
@@ -536,13 +536,13 @@ export function HeroSection() {
                   <>
                     <button
                       onClick={() => setModalImageIndex((prev) => (prev - 1 + selectedPost.images.length) % selectedPost.images.length)}
-                      className="absolute left-4 p-2 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-0 group-hover/modal:opacity-100 backdrop-blur-sm z-10"
+                      className="absolute left-4 p-2 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-100 sm:opacity-0 group-hover/modal:opacity-100 backdrop-blur-sm z-10"
                     >
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg>
                     </button>
                     <button
                       onClick={() => setModalImageIndex((prev) => (prev + 1) % selectedPost.images.length)}
-                      className="absolute right-4 p-2 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-0 group-hover/modal:opacity-100 backdrop-blur-sm z-10"
+                      className="absolute right-4 p-2 bg-black/50 hover:bg-[#715A5A] text-white rounded-full transition-all opacity-100 sm:opacity-0 group-hover/modal:opacity-100 backdrop-blur-sm z-10"
                     >
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 6 6 6-6 6" /></svg>
                     </button>
@@ -558,26 +558,26 @@ export function HeroSection() {
                   </>
                 )}
               </div>
-              <div className="md:w-1/2 p-8 md:p-12 flex flex-col gap-6">
+              <div className="md:w-1/2 p-6 sm:p-12 flex flex-col gap-6">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-2xl font-bold text-[#D3DAD9] tracking-tight">{selectedPost.title}</h3>
-                    <div className="text-xs text-[#715A5A] font-bold mt-1">{formatDate(selectedPost.date)}</div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#D3DAD9] tracking-tight">{selectedPost.title}</h3>
+                    <div className="text-[10px] sm:text-xs text-[#715A5A] font-bold mt-1">{formatDate(selectedPost.date)}</div>
                   </div>
-                  <button onClick={() => setSelectedPost(null)} className="p-2 hover:bg-white/5 rounded-full transition-colors opacity-40 hover:opacity-100">
+                  <button onClick={() => setSelectedPost(null)} className="p-2 hover:bg-white/5 rounded-full transition-colors opacity-40 hover:opacity-100 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12" /></svg>
                   </button>
                 </div>
-                <div className="flex items-center gap-2 opacity-50 text-[10px] uppercase tracking-widest font-bold">
+                <div className="flex items-center gap-2 opacity-50 text-[9px] sm:text-[10px] uppercase tracking-widest font-bold">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
                   {selectedPost.venue}
                 </div>
                 <div className="h-px w-full bg-[#D3DAD9]/10" />
-                <p className="text-sm leading-relaxed opacity-70 italic">
+                <p className="text-xs sm:text-sm leading-relaxed opacity-70 italic">
                   &quot;{selectedPost.caption}&quot;
                 </p>
-                <div className="mt-auto pt-8 flex items-center gap-2">
-                  <div className="text-[10px] opacity-30 uppercase tracking-[0.2em]">Shared via Ritam&apos;s Timeline</div>
+                <div className="mt-auto pt-6 sm:pt-8 flex items-center gap-2">
+                  <div className="text-[9px] sm:text-[10px] opacity-30 uppercase tracking-[0.2em]">Shared via Ritam&apos;s Timeline</div>
                 </div>
               </div>
             </motion.div>
