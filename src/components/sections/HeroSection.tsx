@@ -12,6 +12,7 @@ import {
   experience,
   galleryImages,
   socials,
+  hobbies,
   posts,
   type Post
 } from "@/data/portfolio";
@@ -495,6 +496,35 @@ export function HeroSection() {
                     ))}
                   </div>
                 </section>
+
+                {/* Hobbies Section */}
+                <section className="flex flex-col gap-4">
+                  <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Hobbies</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {hobbies.map((hobby, i) => (
+                      <Link
+                        key={i}
+                        href={hobby.href}
+                        target="_blank"
+                        className="p-5 bg-[#44444E] border border-[#D3DAD9]/5 shadow-lg flex flex-col items-center justify-center gap-3 group hover:bg-[#715A5A]/10 transition-all relative overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#715A5A]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="text-[#D3DAD9]/40 group-hover:text-[#715A5A] transition-colors relative z-10 scale-110">
+                          {hobby.icon}
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity relative z-10">
+                          {hobby.name}
+                        </span>
+                        <div className="flex items-center gap-1 opacity-10 group-hover:opacity-40 transition-opacity relative z-10 mt-1">
+                          <span className="text-[7px] font-bold uppercase tracking-tight">Strava</span>
+                          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m3-3h7v7m-9 2L21 3"/></svg>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  <p className="text-[9px] opacity-20 italic mt-2 px-1">Activities tracked and shared via Strava</p>
+                </section>
+
               </motion.div>
             )}
           </AnimatePresence>

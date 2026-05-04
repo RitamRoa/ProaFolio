@@ -161,6 +161,35 @@ export const socials = [
   }
 ];
 
+export const hobbies = [
+  {
+    name: "Cycling",
+    icon: (
+      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="18.5" cy="17.5" r="3.5" />
+        <circle cx="5.5" cy="17.5" r="3.5" />
+        <circle cx="15" cy="5" r="1" />
+        <path d="M12 17.5V14l-2-3 4-3 2 3h2" />
+      </svg>
+    ),
+    href: "https://www.strava.com/athletes/1773442933"
+  },
+  {
+    name: "Running",
+    icon: (
+      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="5" r="2" />
+        <path d="M8 22l2-5 1-4 3-2 3 5" />
+        <path d="M9 15l-2-4-2 1" />
+        <path d="m14 11-1-3h-4l-2 3" />
+      </svg>
+    ),
+    href: "https://www.strava.com/athletes/1773442933"
+  }
+
+];
+
+
 export const posts: Post[] = [
   {
     id: "build-hackathon",
