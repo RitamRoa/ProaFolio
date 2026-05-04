@@ -195,7 +195,7 @@ export const posts: Post[] = [
     id: "athernex",
     title: "Athernex Hackathon",
     date: "2026-04-24",
-    caption: "Athernex Hackathon organized by BMSCE and DSCE (came top 60 of 1000)",
+    caption: "Athernex, A 24hr Hackathon organized by BMSCE and DSCE (came top 60 of 1000)",
     venue: "BMSCE",
     folder: "athernex",
     images: ["/features_posts/athernex/pic%201%20.jpg", "/features_posts/athernex/pic%202%20.jpeg"]
