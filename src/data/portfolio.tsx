@@ -192,6 +192,15 @@ export const hobbies = [
 
 export const posts: Post[] = [
   {
+    id: "athernex",
+    title: "Athernex Hackathon",
+    date: "2026-04-24",
+    caption: "Athernex Hackathon organized by BMSCE and DSCE (came top 60 of 1000)",
+    venue: "BMSCE",
+    folder: "athernex",
+    images: ["/features_posts/athernex/pic%201%20.jpg", "/features_posts/athernex/pic%202%20.jpeg"]
+  },
+  {
     id: "build-hackathon",
     title: "AI Build Sprint Hackathon",
     date: "2026-04-10",
@@ -218,6 +227,7 @@ export const posts: Post[] = [
     folder: "nav world of ai",
     images: ["/features_posts/nav%20world%20of%20ai/pic%201%20.jpeg"]
   },
+
   {
     id: "linkin-park",
     title: "Linkin Park Concert",
