@@ -117,19 +117,19 @@ export function HeroSection() {
         }));
       });
 
-    // Fetch latest events for accurate push date
+    // Fetch latest events for accurate push/activity date
     fetch("https://api.github.com/users/RitamRoa/events/public")
       .then(res => res.json())
       .then(events => {
-        if (Array.isArray(events)) {
-          const lastPush = events.find((e: any) => e.type === "PushEvent");
-          if (lastPush) {
-            setGithubData(prev => ({
-              repos: prev?.repos || 64,
-              contributions: prev?.contributions || "775+",
-              lastPushed: lastPush.created_at
-            }));
-          }
+        if (Array.isArray(events) && events.length > 0) {
+          // Get the absolute latest activity date
+          const latestEvent = events[0].created_at;
+          
+          setGithubData(prev => ({
+            repos: prev?.repos || 64,
+            contributions: prev?.contributions || "775+",
+            lastPushed: latestEvent
+          }));
         }
       })
       .catch(() => {
@@ -422,6 +422,7 @@ export function HeroSection() {
                       <div className="min-w-[600px] scale-90 sm:scale-100 flex justify-center">
                         <GitHubCalendar
                           username="RitamRoa"
+                          year="last"
                           blockSize={12}
                           blockMargin={4}
                           fontSize={10}
@@ -436,13 +437,22 @@ export function HeroSection() {
 
                     <div className="h-px w-full bg-[#D3DAD9]/10" />
 
-                    <div className="text-xs sm:text-sm opacity-80 font-medium tracking-tight">
-                      Last pushed on {githubData?.lastPushed ? new Date(githubData.lastPushed).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric'
-                      }) : "Monday, May 4th 2026"}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="text-xs sm:text-sm opacity-80 font-medium tracking-tight">
+                        Last activity on {githubData?.lastPushed ? new Date(githubData.lastPushed).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric'
+                        }) : "Monday, May 4th 2026"}
+                      </div>
+                      <Link 
+                        href="https://github.com/RitamRoa" 
+                        target="_blank"
+                        className="text-[10px] text-[#715A5A] font-bold uppercase tracking-widest hover:underline"
+                      >
+                        View Profile →
+                      </Link>
                     </div>
                   </div>
                 </section>
