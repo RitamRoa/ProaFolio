@@ -388,7 +388,7 @@ export function HeroSection() {
                         <h2 className="text-3xl font-bold text-[#D3DAD9] tracking-tight">About Me</h2>
                       </div>
                     </div>
-                    <p className="opacity-80 leading-relaxed text-base italic max-w-xl border-l-2 border-[#715A5A]/20 pl-6 py-2">
+                    <p className="opacity-95 leading-relaxed text-base italic max-w-xl border-l-2 border-[#715A5A]/20 pl-6 py-2 text-[#D3DAD9]">
                       &quot;In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
                     </p>
                     <div className="flex flex-wrap items-center gap-4 mt-2">
@@ -450,16 +450,16 @@ export function HeroSection() {
                 {/* Experience Section - Concise & Prominent */}
                 <section className="flex flex-col gap-6 mt-8">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold tracking-[0.4em] uppercase text-[#D3DAD9] opacity-40">Experience</h3>
-                    <div className="text-[10px] opacity-20 font-mono">4 Total Positions</div>
+                    <h3 className="text-xs font-bold tracking-[0.4em] uppercase text-[#D3DAD9] opacity-70">Experience</h3>
+                    <div className="text-[10px] opacity-40 font-mono">4 Total Positions</div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {experience.map((exp, i) => (
                       <motion.div
                         key={i}
-                        whileHover={{ y: -4, backgroundColor: "rgba(113, 90, 90, 0.05)" }}
-                        className="p-6 bg-[#44444E]/40 border border-white/5 hover:border-[#715A5A]/30 transition-all duration-300 relative group overflow-hidden"
+                        whileHover={{ y: -4, backgroundColor: "rgba(113, 90, 90, 0.1)" }}
+                        className="p-6 bg-[#44444E]/60 border border-white/10 hover:border-[#715A5A]/50 transition-all duration-300 relative group overflow-hidden rounded-sm"
                       >
                         {/* Glow effect on hover */}
                         <div className="absolute -inset-px bg-gradient-to-br from-[#715A5A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -474,7 +474,7 @@ export function HeroSection() {
                                 <Link
                                   href={exp.cert}
                                   target="_blank"
-                                  className="shrink-0 text-[#715A5A] opacity-40 hover:opacity-100 transition-opacity"
+                                  className="shrink-0 text-[#715A5A] opacity-60 hover:opacity-100 transition-opacity"
                                   title="View Certificate"
                                 >
                                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -484,17 +484,17 @@ export function HeroSection() {
                                 </Link>
                               )}
                             </div>
-                            <div className="text-[11px] font-bold text-[#715A5A] uppercase tracking-widest opacity-80">
+                            <div className="text-[11px] font-bold text-[#715A5A] uppercase tracking-widest brightness-125">
                               {exp.org}
                             </div>
                           </div>
                           
-                          <p className="text-xs opacity-50 leading-relaxed line-clamp-2 italic">
+                          <p className="text-xs text-[#D3DAD9] opacity-80 leading-relaxed line-clamp-2 italic">
                             {exp.desc}
                           </p>
 
-                          <div className="pt-2 flex items-center justify-between border-t border-white/5">
-                            <span className="text-[9px] font-medium opacity-30 uppercase tracking-wider">{exp.period}</span>
+                          <div className="pt-2 flex items-center justify-between border-t border-white/10">
+                            <span className="text-[9px] font-bold text-[#D3DAD9] opacity-60 uppercase tracking-wider">{exp.period}</span>
                             <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                <div className="w-1 h-1 rounded-full bg-[#715A5A]" />
                                <div className="w-1 h-1 rounded-full bg-[#715A5A]/60" />
