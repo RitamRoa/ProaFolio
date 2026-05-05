@@ -450,52 +450,65 @@ export function HeroSection() {
                 {/* Experience Section - Concise & Prominent */}
                 <section className="flex flex-col gap-6 mt-8">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold tracking-[0.4em] uppercase text-[#D3DAD9] opacity-70">Experience</h3>
-                    <div className="text-[10px] opacity-40 font-mono">4 Total Positions</div>
+                    <h3 className="text-xs font-bold tracking-[0.4em] uppercase text-white/70">Experience</h3>
+                    <div className="text-[10px] text-white/30 font-mono">4 Total Positions</div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {experience.map((exp, i) => (
                       <motion.div
                         key={i}
-                        whileHover={{ y: -4, backgroundColor: "rgba(113, 90, 90, 0.1)" }}
-                        className="p-6 bg-[#44444E]/60 border border-white/10 hover:border-[#715A5A]/50 transition-all duration-300 relative group overflow-hidden rounded-sm"
+                        whileHover={{ y: -4, backgroundColor: "rgba(113, 90, 90, 0.15)" }}
+                        className="p-6 bg-[#44444E]/80 border border-white/10 hover:border-[#715A5A]/50 transition-all duration-300 relative group overflow-hidden rounded-sm"
                       >
                         {/* Glow effect on hover */}
-                        <div className="absolute -inset-px bg-gradient-to-br from-[#715A5A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                        <div className="absolute -inset-px bg-gradient-to-br from-[#715A5A]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                         
-                        <div className="relative z-10 flex flex-col h-full justify-between gap-4">
-                          <div className="flex flex-col gap-1.5">
-                            <div className="flex justify-between items-start gap-4">
-                              <h4 className="text-base font-bold text-[#D3DAD9] tracking-tight group-hover:text-white transition-colors leading-tight">
-                                {exp.role}
-                              </h4>
-                              {exp.cert && (
-                                <Link
-                                  href={exp.cert}
-                                  target="_blank"
-                                  className="shrink-0 text-[#715A5A] opacity-60 hover:opacity-100 transition-opacity"
-                                  title="View Certificate"
-                                >
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                                    <circle cx="12" cy="12" r="3" />
-                                  </svg>
-                                </Link>
-                              )}
-                            </div>
-                            <div className="text-[11px] font-bold text-[#715A5A] uppercase tracking-widest brightness-125">
-                              {exp.org}
+                        <div className="relative z-10 flex flex-col h-full justify-between gap-5">
+                          <div className="flex gap-4 items-start">
+                            {exp.logo && (
+                              <div className="shrink-0 w-12 h-12 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#715A5A]/50 transition-colors shadow-lg">
+                                <Image 
+                                  src={exp.logo} 
+                                  alt={exp.org} 
+                                  width={48} 
+                                  height={48} 
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                              </div>
+                            )}
+                            <div className="flex flex-col gap-1 flex-1">
+                              <div className="flex justify-between items-start gap-4">
+                                <h4 className="text-base font-bold text-white tracking-tight leading-tight">
+                                  {exp.role}
+                                </h4>
+                                {exp.cert && (
+                                  <Link
+                                    href={exp.cert}
+                                    target="_blank"
+                                    className="shrink-0 text-[#A88B8B] hover:text-white transition-colors"
+                                    title="View Certificate"
+                                  >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                      <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                  </Link>
+                                )}
+                              </div>
+                              <div className="text-[10px] font-bold text-[#A88B8B] uppercase tracking-wider leading-relaxed line-clamp-1">
+                                {exp.org}
+                              </div>
                             </div>
                           </div>
                           
-                          <p className="text-xs text-[#D3DAD9] opacity-80 leading-relaxed line-clamp-2 italic">
+                          <p className="text-xs text-white/90 leading-relaxed line-clamp-2 italic">
                             {exp.desc}
                           </p>
 
                           <div className="pt-2 flex items-center justify-between border-t border-white/10">
-                            <span className="text-[9px] font-bold text-[#D3DAD9] opacity-60 uppercase tracking-wider">{exp.period}</span>
-                            <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span className="text-[9px] font-bold text-white/60 uppercase tracking-wider">{exp.period}</span>
+                            <div className="flex gap-1 opacity-100 transition-opacity">
                                <div className="w-1 h-1 rounded-full bg-[#715A5A]" />
                                <div className="w-1 h-1 rounded-full bg-[#715A5A]/60" />
                                <div className="w-1 h-1 rounded-full bg-[#715A5A]/30" />

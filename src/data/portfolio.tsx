@@ -29,7 +29,8 @@ export const experience = [
     org: "DevSphere - Open Source Community @ RVU",
     period: "Jul 2025 - Present",
     desc: "Leading and Developing the Open Source Community at RVU.",
-    cert: "/certificates/dev-cert-1.pdf"
+    cert: "/certificates/dev-cert-1.pdf",
+    logo: "/logos/devsphere%20logo.jpg"
   },
   {
     role: "Team Lead",
@@ -42,7 +43,8 @@ export const experience = [
     role: "PR & Outreach",
     org: "GDG - RVU",
     period: "Aug 2025 - Dec 2025",
-    desc: "Connecting the developer student club with the campus and out."
+    desc: "Connecting the developer student club with the campus and out.",
+    logo: "/logos/gdgrvu%20logo.jpg"
   },
   {
     role: "Business Development",
