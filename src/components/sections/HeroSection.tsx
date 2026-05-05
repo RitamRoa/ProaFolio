@@ -76,6 +76,10 @@ const DraggableProfile = ({
   </div>
 );
 
+const GITHUB_THEME = {
+  dark: ['#1d1d21', '#0e4429', '#006d32', '#26a641', '#39d353'],
+};
+
 export function HeroSection() {
   const [view, setView] = useState<'home' | 'about' | 'posts' | 'gallery'>('home');
   const [imageIndex, setImageIndex] = useState(0);
@@ -428,9 +432,7 @@ export function HeroSection() {
                           fontSize={10}
                           showTotalCount={false}
                           showColorLegend={false}
-                          theme={{
-                            dark: ['#1d1d21', '#0e4429', '#006d32', '#26a641', '#39d353'],
-                          }}
+                          theme={GITHUB_THEME}
                         />
                       </div>
                     </div>
