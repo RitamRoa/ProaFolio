@@ -382,8 +382,13 @@ export function HeroSection() {
                 <section className="flex flex-col md:flex-row items-center md:items-start gap-10 py-6">
                   <DraggableProfile size="h-40 w-40 sm:h-48 sm:w-48" imageIndex={imageIndex} setImageIndex={setImageIndex} />
                   <div className="flex flex-col gap-4 flex-1">
-                    <h2 className="text-3xl font-bold text-[#D3DAD9]">About Me</h2>
-                    <p className="opacity-80 leading-relaxed text-base italic max-w-xl">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-px bg-[#715A5A]" />
+                        <h2 className="text-3xl font-bold text-[#D3DAD9] tracking-tight">About Me</h2>
+                      </div>
+                    </div>
+                    <p className="opacity-80 leading-relaxed text-base italic max-w-xl border-l-2 border-[#715A5A]/20 pl-6 py-2">
                       &quot;In a committed relationship with the right-hand tail of the normal distribution curve. also i like building things that people would use.
                     </p>
                     <div className="flex flex-wrap items-center gap-4 mt-2">
@@ -442,56 +447,95 @@ export function HeroSection() {
                   </div>
                 </section>
 
-                {/* Experience Boxes */}
-                <section className="flex flex-col gap-4">
-                  <h3 className="text-[11px] font-bold tracking-widest uppercase opacity-40 text-[#D3DAD9]">Experience</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Experience Section - Redesigned for prominence */}
+                <section className="flex flex-col gap-10 mt-8">
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-[#715A5A] blur-md opacity-20" />
+                      <div className="relative w-2 h-2 bg-[#715A5A] rounded-full" />
+                    </div>
+                    <h3 className="text-sm font-bold tracking-[0.4em] uppercase text-[#D3DAD9] opacity-90">Experience</h3>
+                    <div className="h-px flex-1 bg-gradient-to-r from-[#715A5A]/40 via-[#44444E] to-transparent" />
+                  </div>
+                  
+                  <div className="flex flex-col gap-8 relative">
+                    {/* Vertical Line for Timeline feel */}
+                    <div className="absolute left-[11px] top-4 bottom-4 w-[1px] bg-gradient-to-b from-[#715A5A]/40 via-[#44444E]/50 to-transparent hidden sm:block" />
+                    
                     {experience.map((exp, i) => (
                       <motion.div
                         key={i}
-                        whileHover={{ y: -3 }}
-                        className="p-5 bg-[#44444E] border border-[#D3DAD9]/5 shadow-lg flex flex-col gap-3 relative group"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        className="relative pl-0 sm:pl-12 group"
                       >
-                        <div className="flex justify-between items-start">
-                          <div className="text-[9px] font-bold text-[#715A5A] uppercase tracking-wider bg-[#715A5A]/10 px-2 py-0.5 rounded-full">
-                            {exp.period}
-                          </div>
-                          <div className="flex gap-2">
-                            {exp.cert && (
-                              <>
-                                <Link
-                                  href={exp.cert}
-                                  target="_blank"
-                                  className="opacity-40 group-hover:opacity-100 transition-opacity bg-[#715A5A]/10 hover:bg-[#715A5A]/30 p-1.5 rounded-md"
-                                  title="View Certificate"
-                                >
-                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                                    <circle cx="12" cy="12" r="3" />
-                                  </svg>
-                                </Link>
-                                <Link
-                                  href={exp.cert}
-                                  download
-                                  target="_blank"
-                                  className="opacity-40 group-hover:opacity-100 transition-opacity bg-[#715A5A]/10 hover:bg-[#715A5A]/30 p-1.5 rounded-md"
-                                  title="Download Certificate"
-                                >
-                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-10 5 5 5-5m-5-4v14" />
-                                  </svg>
-                                </Link>
-                              </>
-                            )}
-                          </div>
+                        {/* Timeline Dot with Glow */}
+                        <div className="absolute left-0 top-[26px] w-[22px] h-[22px] bg-[#37353E] border-2 border-[#44444E] rounded-full z-10 hidden sm:flex items-center justify-center group-hover:border-[#715A5A] transition-all duration-500 shadow-xl">
+                          <div className="w-1.5 h-1.5 bg-[#715A5A] rounded-full group-hover:scale-150 transition-transform duration-500 group-hover:shadow-[0_0_12px_rgba(113,90,90,0.8)]" />
                         </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-[#D3DAD9]">{exp.role}</h4>
-                          <div className="text-[10px] opacity-50 mt-1">{exp.org}</div>
-                        </div>
-                        <p className="text-[11px] opacity-60 leading-relaxed mt-1">
-                          {exp.desc}
-                        </p>
+
+                        <motion.div
+                          whileHover={{ y: -4, x: 2 }}
+                          className="p-8 bg-[#44444E]/40 border border-[#D3DAD9]/5 shadow-2xl hover:shadow-[#000000]/40 hover:border-[#715A5A]/40 transition-all duration-500 relative overflow-hidden backdrop-blur-md rounded-xl"
+                        >
+                          {/* Premium Background Accent */}
+                          <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#715A5A]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                          
+                          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
+                            <div className="flex flex-col gap-2">
+                              <div className="inline-flex items-center gap-2 text-[9px] font-bold text-[#715A5A] uppercase tracking-[0.2em] bg-[#715A5A]/5 px-3 py-1 rounded-full border border-[#715A5A]/10 w-fit">
+                                <span className="w-1 h-1 bg-[#715A5A] rounded-full animate-pulse" />
+                                {exp.period}
+                              </div>
+                              <h4 className="text-xl font-bold text-[#D3DAD9] group-hover:text-white transition-colors tracking-tight mt-1">{exp.role}</h4>
+                              <div className="flex items-center gap-2.5 text-xs font-medium opacity-50 group-hover:opacity-80 transition-opacity">
+                                <div className="p-1.5 bg-[#37353E] rounded-md border border-[#D3DAD9]/5">
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="M3 9V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"/><path d="M12 12v6"/></svg>
+                                </div>
+                                {exp.org}
+                              </div>
+                            </div>
+
+                            <div className="flex gap-2 shrink-0 self-start md:self-start mt-1">
+                              {exp.cert && (
+                                <>
+                                  <Link
+                                    href={exp.cert}
+                                    target="_blank"
+                                    className="flex items-center gap-2 bg-[#715A5A] text-white px-4 py-2 rounded-lg shadow-lg shadow-[#715A5A]/20 hover:brightness-110 active:scale-95 transition-all text-[10px] font-bold uppercase tracking-wider"
+                                    title="View Certificate"
+                                  >
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                      <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                    Verify
+                                  </Link>
+                                  <Link
+                                    href={exp.cert}
+                                    download
+                                    target="_blank"
+                                    className="flex items-center justify-center bg-[#D3DAD9]/5 hover:bg-[#D3DAD9]/10 text-[#D3DAD9] p-2.5 rounded-lg border border-[#D3DAD9]/10 transition-all hover:border-[#D3DAD9]/20"
+                                    title="Download Certificate"
+                                  >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-10 5 5 5-5m-5-4v14" />
+                                    </svg>
+                                  </Link>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                          
+                          <div className="relative">
+                            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#715A5A] to-transparent opacity-30" />
+                            <p className="text-[13px] opacity-70 leading-relaxed pl-5 italic group-hover:opacity-90 transition-opacity">
+                              {exp.desc}
+                            </p>
+                          </div>
+                        </motion.div>
                       </motion.div>
                     ))}
                   </div>
