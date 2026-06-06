@@ -52,6 +52,13 @@ export const experience = [
     period: "Jun 2025 - Jul 2025",
     desc: "Strategic outreach and market positioning for emerging tech solutions.",
     cert: "/certificates/zans-business-marketing-certificate.pdf"
+  },
+  {
+    role: "ICSSR Undergraduate Research Assistant",
+    org: "ICSSR",
+    period: "Feb 2025 - July 2025",
+    desc: "Application development for the Bengaluru Police Officers",
+    cert: "/certificates/ICSSR%20RVU%20Std%20Certificates-3.pdf"
   }
 ];
 
