@@ -22,6 +22,9 @@ export const quotes = [
   { text: "Damn, You're Ugly.", author: "Geralt of Rivia" },
   { text: "I Am Vengeance. I Am The Night. I Am Batman!", author: "Random Orphan" },
   { text: "You tell me whats it like to have a Heart of Stone", author: "Geralt of Rivia" },
+  { text: "This is my story, not yours. You must let me finish telling it.", author: "Ciri" },
+  { text: "Uma Um Um Uma Uma Ma Uma Um Ma Ma Uma Uma", author: "Uma" },
+  { text: "Time eats away memories,distorts them.Sometimes we only remember the good...sometimes only the bad.", author: "Blood and Wine" },
 ];
 
 export const experience = [
