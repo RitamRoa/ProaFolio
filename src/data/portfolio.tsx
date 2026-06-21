@@ -21,6 +21,7 @@ export const quotes = [
   { text: "Goodbye, V, And Never Stop Fighting.", author: "Silverhand" },
   { text: "Damn, You're Ugly.", author: "Geralt of Rivia" },
   { text: "I Am Vengeance. I Am The Night. I Am Batman!", author: "Random Orphan" },
+  { text: "You tell me whats it like to have a Heart of Stone", author: "Geralt of Rivia" },
 ];
 
 export const experience = [
