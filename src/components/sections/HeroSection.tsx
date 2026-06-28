@@ -208,6 +208,14 @@ export function HeroSection() {
                       >
                         Book a call
                       </Link>
+                      <Link
+                        href="/Ritam_Rao___Resume-3.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#44444E] text-[#D3DAD9] px-4 py-1.5 text-[10px] font-bold shadow-lg hover:brightness-110 transition-all border border-[#D3DAD9]/10"
+                      >
+                        Resume
+                      </Link>
                     </div>
                   </div>
                 </section>
@@ -409,6 +417,14 @@ export function HeroSection() {
                         className="bg-[#715A5A] text-[#D3DAD9] px-4 py-1.5 text-[10px] font-bold shadow-lg hover:brightness-110 transition-all border border-[#D3DAD9]/10"
                       >
                         Book a call
+                      </Link>
+                      <Link
+                        href="/Ritam_Rao___Resume-3.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#44444E] text-[#D3DAD9] px-4 py-1.5 text-[10px] font-bold shadow-lg hover:brightness-110 transition-all border border-[#D3DAD9]/10"
+                      >
+                        Resume
                       </Link>
                     </div>
                   </div>
