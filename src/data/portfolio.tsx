@@ -220,7 +220,11 @@ export const posts: Post[] = [
     caption: "Delivered the SPARS business pitch at FKCCI, competing against 1,000+ teams and 5,000+ students.",
     venue: "FKCCI Building",
     folder: "fkcci spars",
-    images: ["/features_posts/fkcci%20spars/fkcci%20spars.jpeg"]
+    images: [
+      "/features_posts/fkcci%20spars/fkcci%20spars.jpeg",
+      "/features_posts/fkcci%20spars/spars%20fkcci%202%20.jpg",
+      "/features_posts/fkcci%20spars/fkcci%20spars%203.jpeg"
+    ]
   },
   {
     id: "athernex",
