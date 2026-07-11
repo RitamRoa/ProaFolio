@@ -214,6 +214,15 @@ export const hobbies = [
 
 export const posts: Post[] = [
   {
+    id: "fkcci-spars",
+    title: "Presenting SPARS in FKCCI",
+    date: "2026-07-10",
+    caption: "Delivered the SPARS business pitch at FKCCI, competing against 1,000+ teams and 5,000+ students.",
+    venue: "FKCCI Building",
+    folder: "fkcci spars",
+    images: ["/features_posts/fkcci%20spars/fkcci%20spars.jpeg"]
+  },
+  {
     id: "athernex",
     title: "Athernex Hackathon",
     date: "2026-04-24",
