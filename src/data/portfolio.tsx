@@ -67,6 +67,14 @@ export const experience = [
 ];
 
 export const galleryImages = [
+  "/gallery/july-10.jpeg",
+  "/gallery/july-9-2.jpeg",
+  "/gallery/july-9.jpeg",
+  "/gallery/july-7.jpeg",
+  "/gallery/july-5-2.jpeg",
+  "/gallery/july-5-1.jpeg",
+  "/gallery/may-12.jpeg",
+  "/gallery/may-6.jpeg",
   "/gallery/WhatsApp%20Image%202026-05-04%20at%201.04.36%20AM.jpeg",
   "/gallery/WhatsApp%20Image%202026-05-04%20at%201.04.40%20AM.jpeg",
   "/gallery/WhatsApp%20Image%202026-05-04%20at%201.04.47%20AM.jpeg",
