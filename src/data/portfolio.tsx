@@ -29,6 +29,13 @@ export const quotes = [
 
 export const experience = [
   {
+    role: "Fintech Intern",
+    org: "Perpetual Trading Systems",
+    period: "July 1st to Present",
+    desc: "Building trading agents and helping clients make profit",
+    cert: "/certificates/internship-offer-ritam.pdf"
+  },
+  {
     role: "President",
     org: "DevSphere - Open Source Community @ RVU",
     period: "Jul 2025 - Present",
@@ -67,6 +74,7 @@ export const experience = [
 ];
 
 export const galleryImages = [
+  "/gallery/pts2.jpeg",
   "/gallery/july-10.jpeg",
   "/gallery/july-9-2.jpeg",
   "/gallery/july-9.jpeg",
@@ -221,6 +229,19 @@ export const hobbies = [
 
 
 export const posts: Post[] = [
+  {
+    id: "trading-interning",
+    title: "Trading and interning going hand in hand",
+    date: "2026-07-14",
+    caption: "started at 1st july but i knew i started a year ago...",
+    venue: "manyata tech park",
+    folder: "pts",
+    images: [
+      "/features_posts/pts/pts.jpg",
+      "/features_posts/pts/pts1.jpeg",
+      "/features_posts/pts/pts3.jpeg"
+    ]
+  },
   {
     id: "fkcci-spars",
     title: "Presenting SPARS in FKCCI",

@@ -479,7 +479,7 @@ export function HeroSection() {
                 <section className="flex flex-col gap-6 mt-8">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xs font-bold tracking-[0.4em] uppercase text-white/70">Experience</h3>
-                    <div className="text-[10px] text-white/30 font-mono">4 Total Positions</div>
+                    <div className="text-[10px] text-white/30 font-mono">{experience.length} Total Positions</div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
