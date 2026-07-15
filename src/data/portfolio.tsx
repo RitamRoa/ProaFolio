@@ -33,7 +33,8 @@ export const experience = [
     org: "Perpetual Trading Systems",
     period: "July 1st to Present",
     desc: "Building trading agents and helping clients make profit",
-    cert: "/certificates/internship-offer-ritam.pdf"
+    cert: "/certificates/internship-offer-ritam.pdf",
+    logo: "/logos/pts.jpg"
   },
   {
     role: "President",
@@ -48,14 +49,16 @@ export const experience = [
     org: "ICSSR",
     period: "Feb 2025 - July 2025",
     desc: "Application development for the Bengaluru Police Officers",
-    cert: "/certificates/ICSSR%20RVU%20Std%20Certificates-3.pdf"
+    cert: "/certificates/ICSSR%20RVU%20Std%20Certificates-3.pdf",
+    logo: "/logos/icssr.jpg"
   },
   {
     role: "Business Development",
     org: "ZANS",
     period: "Jun 2025 - Jul 2025",
     desc: "Strategic outreach and market positioning for emerging tech solutions.",
-    cert: "/certificates/zans-business-marketing-certificate.pdf"
+    cert: "/certificates/zans-business-marketing-certificate.pdf",
+    logo: "/logos/zans.jpg"
   },
   {
     role: "PR & Outreach",
